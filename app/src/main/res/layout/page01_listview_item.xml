@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingRight="@dimen/padding_12"
+    android:paddingLeft="@dimen/padding_12">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_40"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/page01_lv_iv_"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_40"
+        android:layout_weight="6"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:text="代办任务"
+        android:id="@+id/page01_lv_item_text_"/>
+
+    <ImageView
+        android:id="@+id/youjiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/chevron"/>
+
+</LinearLayout>

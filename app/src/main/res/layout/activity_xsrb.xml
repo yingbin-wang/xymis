@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/gray">
+
+                <TableRow android:layout_width="match_parent">
+                    <LinearLayout android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="1dp"
+                        android:paddingBottom="1dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="2017年-02-20日"
+                            style="@style/content_activity_xsrb_text"/>
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:text="日期"
+                            style="@style/content_activity_xsrb_text"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="1dp"
+                        android:paddingBottom="1dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="李晓莉"
+                            style="@style/content_activity_xsrb_text"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="填报人"
+                            style="@style/content_activity_xsrb_text"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent">
+                    <LinearLayout android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="1dp"
+                        android:paddingBottom="1dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="0.00"
+                            style="@style/content_activity_xsrb_title"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="本月销售预算"
+                            style="@style/content_activity_xsrb_title"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="1dp"
+                        android:paddingBottom="1dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="0.00"
+                            style="@style/content_activity_xsrb_title"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="本月销售预算"
+                            style="@style/content_activity_xsrb_title"/>
+                    </LinearLayout>
+
+                    <LinearLayout android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="1dp"
+                        android:paddingBottom="1dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="0.00"
+                            style="@style/content_activity_xsrb_title"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="本月销售预算"
+                            style="@style/content_activity_xsrb_title"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <!--工作类型-->
+                <TableRow android:layout_width="match_parent"
+                    android:background="@color/colorWhite">
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/row1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="工作类型："
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="论坛推广"
+                                android:textColor="@color/base_start_color_pressed"
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="关联客户："
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                            <com.cn.wti.entity.view.custom.textview.ReadView
+                                android:id="@+id/glkh"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:textColor="@color/base_start_color_pressed"
+                                android:text="打开房间的哈哈"
+                                style="@style/content_activity_xsrb_gzlx"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/row2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="1dp"
+                            android:paddingTop="10dp">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="工作总结："
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                            <com.cn.wti.entity.view.custom.textview.ReadView
+                                android:id="@+id/gzzj"
+                                android:layout_width="0dp"
+                                android:layout_weight="3"
+                                android:textColor="@color/base_start_color_pressed"
+                                android:text="dfalksdjfkalsjdkfljasdkjfk大家发快递就罚款了大家疯狂拉升阶段开发的剑法快乐圣诞节分厘,卡圣诞节反抗就看见；的卡夫卡的解放咔叽地热大幅低开jfk个手机开发了就离开1"
+                                style="@style/content_activity_xsrb_gzlx"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </TableRow>
+
+                <!--日报问答-->
+                <TableRow android:layout_width="match_parent"
+                    android:background="@color/gray"
+                    android:paddingBottom="1dp"
+                    android:paddingTop="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="日报问答："
+                                android:paddingLeft="10dp"
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                            <com.cn.wti.entity.view.custom.textview.ReadView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:textColor="@color/base_start_color_pressed"
+                                android:paddingLeft="5dp"
+                                android:text="呵呵"
+                                style="@style/content_activity_xsrb_gzlx"/>
+
+                        </LinearLayout>
+
+
+                        <!-- 回复-->
+                        <LinearLayout
+                            android:id="@+id/huifu_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:background="@color/colorWhite">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="1"
+                                android:background="@color/colorWhite"
+                                android:paddingBottom="10dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:gravity="center_horizontal"
+                                    android:layout_weight="1"
+                                    android:text="张三："
+                                    style="@style/content_activity_xsrb_huifu"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="3"
+                                    android:textColor="@color/base_start_color_pressed"
+                                    android:text="dfalksdjfkalsjdkfljasdkjfk大家发快递就罚款了大家疯狂拉升阶段开发的剑法快乐圣诞节分厘
+                                    卡圣诞节反抗就看见；的卡夫卡的解放咔叽地热大幅低开jfk个手机开发了就离开1"
+                                    style="@style/content_activity_xsrb_huifu"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </TableRow>
+
+             <!--   <TableRow android:layout_width="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/huifu_2layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:background="@color/colorWhite">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1"
+                                android:text="张三："
+                                style="@style/content_activity_xsrb_huifu"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="3"
+                                android:textColor="@color/base_start_color_pressed"
+                                android:text="dfalksdjfkalsjdkfljasdkjfk大家发快递就罚款了大家疯狂拉升阶段开发的剑法快乐圣诞节分厘
+                                卡圣诞节反抗就看见；的卡夫卡的解放咔叽地热大幅低开jfk个手机开发了就离开1"
+                                style="@style/content_activity_xsrb_huifu"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="张三："
+                                style="@style/content_activity_xsrb_huifu"/>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="3"
+                                android:textColor="@color/base_start_color_pressed"
+                                android:text="dfalksdjfkalsjdkfljasdkjfk大家发快递就罚款了大家疯狂拉升阶段开发的剑法快乐圣诞节分厘
+                                卡圣诞节反抗就看见；的卡夫卡的解放咔叽地热大幅低开jfk个手机开发了就离开1"
+                                style="@style/content_activity_xsrb_huifu"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </TableRow>-->
+
+                <TableRow android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite">
+
+                    <TextView android:layout_width="0dp"
+                        android:layout_weight="4"/>
+
+                    <Button
+                        android:id="@+id/huifu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="回复"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

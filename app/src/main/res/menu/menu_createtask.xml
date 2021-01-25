@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/wwj"
+        android:icon="@mipmap/app_aapay"
+        app:showAsAction="always"
+        android:title="未完结"/>
+
+    <item
+        android:id="@+id/ywj"
+        android:icon="@mipmap/app_aapay"
+        app:showAsAction="always"
+        android:title="已完结"/>
+
+    <item
+        android:id="@+id/gb"
+        android:icon="@mipmap/app_aapay"
+        app:showAsAction="always"
+        android:title="关闭"/>
+
+    <item
+        android:id="@+id/qb"
+        android:icon="@mipmap/app_aapay"
+        app:showAsAction="always"
+        android:title="全部"/>
+</menu>

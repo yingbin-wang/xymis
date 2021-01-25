@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:textSize="14sp"
+        android:textColor="@color/colorWhite"
+        android:text="报表"
+        android:background="@color/light_blue"
+        android:gravity="center_horizontal|center_vertical"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/height_40"
+        android:id="@+id/testView"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <ExpandableListView android:id="@+id/men_moreList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ts_llt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/tstb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/wuquanxian"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_12"
+            android:gravity="center_horizontal|center_vertical">
+            <TextView
+                android:id="@+id/tsxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/noqxdata"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

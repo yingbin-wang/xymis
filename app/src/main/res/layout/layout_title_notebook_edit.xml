@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_gravity="fill_horizontal"
+    android:orientation="horizontal"
+    android:layout_height="fill_parent"
+    android:background="@color/light_blue">
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/title_back2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
+        android:text="取消"
+        android:background="@drawable/button_bianpinghua"
+        android:textColor="@color/colorWhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_name2"
+        android:layout_toRightOf="@+id/title_back2"
+        android:layout_toLeftOf="@+id/title_ok2"
+        android:textColor="@color/colorWhite"
+        android:layout_centerVertical="true"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/title_ok2"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:text="完成"
+        android:background="@drawable/button_bianpinghua"
+        android:textColor="@color/colorWhite"/>
+
+</RelativeLayout>

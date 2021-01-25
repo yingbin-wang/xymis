@@ -1,0 +1,122 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_left1
+            android:id="@+id/title_1_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_top1
+            android:id="@+id/list_1_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_top1
+            android:id="@+id/title_1_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_top1
+            android:id="@+id/list_1_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+    <!--订单号 发货单号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_left1
+            android:id="@+id/title_1_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/list_1_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/title_1_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/list_1_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+
+    <!--物流公司 物流单号-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_left1
+            android:id="@+id/title_1_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/list_1_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/title_1_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+            android:id="@+id/list_1_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1_5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1_6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout">
+    </LinearLayout>
+
+</LinearLayout>

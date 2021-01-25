@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/showwfqd"
+        android:icon="@mipmap/chakan"
+        android:title="我发起的"
+        android:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/add"
+        android:icon="@mipmap/add"
+        android:title="新建"
+        android:showAsAction="ifRoom"/>
+</menu>

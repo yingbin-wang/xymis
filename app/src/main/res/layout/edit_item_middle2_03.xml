@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer" android:orientation="horizontal"
+    android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:minHeight="40dip" style="@style/list_item_middle">
+
+    <ImageView android:id="@+id/image" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+    <RelativeLayout
+        android:duplicateParentState="true"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="@dimen/padding_12"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView android:text="title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_40"
+            android:id="@+id/title"
+            style="@style/content_page_large_text"/>
+
+        <com.cn.wti.entity.view.custom.CheckBox_custom
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:id="@+id/subtitle"
+            android:visibility="visible"
+            style="@style/content_page_small_text"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:paddingRight="@dimen/padding_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chevron"
+                    android:visibility="gone"
+                    style="@style/list_item_chevron"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/itemCount"
+                style="@style/content_page_large_count_text" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout> 

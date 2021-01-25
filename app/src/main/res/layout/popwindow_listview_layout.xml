@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingRight="@dimen/padding_10"
+            android:background="@color/light_blue"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/navigationbar_back"
+                android:background="@drawable/button_bianpinghua"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="20dp"
+                android:textColor="@color/colorWhite"/>
+
+            <ImageButton
+                android:id="@+id/btnOK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/duihao"
+                android:background="@drawable/button_bianpinghua"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/rel_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_5"
+            android:background="@color/line"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:drawableLeft="@mipmap/fangda"
+                android:background="@drawable/linearlayout_dialog_background"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                android:id="@+id/showcs"/>
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@mipmap/myapply"
+                android:layout_weight="10"
+                android:id="@+id/btnShow"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/refresh_view"
+            android:layout_below="@id/rel_select">
+
+            <include layout="@layout/refresh_head" />
+
+            <com.cn.wti.entity.view.pulltorefresh.PullableScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.cn.wti.entity.view.custom.AdpaterListView_custom.ListViewForScrollView
+                        android:id="@+id/listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:cacheColorHint="#00000000"
+                        android:background="@color/colorWhite"
+                        android:divider="@color/gray" >
+                    </com.cn.wti.entity.view.custom.AdpaterListView_custom.ListViewForScrollView>
+
+                </LinearLayout>
+
+            </com.cn.wti.entity.view.pulltorefresh.PullableScrollView>
+
+            <include layout="@layout/load_more" />
+
+        </com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout>
+
+    </LinearLayout>
+</LinearLayout>

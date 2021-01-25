@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cn.wti.entity.view.custom.button.SlidingButtonView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hsv"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:scrollbars="none"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/itemContainer"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                style="@style/list_item_middle">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView android:id="@+id/image" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:paddingRight="@dimen/padding_15">
+
+                        <LinearLayout
+                            android:duplicateParentState="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/title"
+                                android:textSize="@dimen/textsize_16"
+                                style="@style/content_page_large_text"/>
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="summary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/padding_12"
+                                android:textSize="@dimen/textsize_14"
+                                android:id="@+id/subtitle"
+                                android:visibility="visible"
+                                style="@style/content_page_large_text"/>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/content_2"
+                                style="@style/content_list_small_text2"/>
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="summary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/content_3"
+                                android:visibility="visible"
+                                style="@style/content_list_small_text2"
+                                android:gravity="center"
+                                android:layout_toLeftOf="@id/content_6"
+                                android:layout_toRightOf="@id/content_4"/>
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="summary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/content_4"
+                                android:visibility="visible"
+                                style="@style/content_list_small_text2"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:text="title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/padding_10"
+                            android:paddingRight="@dimen/padding_10"
+                            android:id="@+id/content_1"
+                            style="@style/content_list_small_text2"
+                            android:layout_alignParentRight="true"/>
+
+                        <ImageView
+                            android:id="@+id/chevron"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/chevron" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_action"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="@color/keyguard_text_color_red">
+
+                <TextView
+                    android:id="@+id/btn_cuiban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:text="催办"/>
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhite"/>
+                <TextView
+                    android:id="@+id/btn_zuofei"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:text="作废"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+    </LinearLayout>
+
+</com.cn.wti.entity.view.custom.button.SlidingButtonView>

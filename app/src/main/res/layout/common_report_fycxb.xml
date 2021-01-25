@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/padding_10"
+        android:id="@+id/hjrow">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/hj1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="@dimen/padding_5"
+                android:visibility="gone">
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="vertical"
+                    android:background="@color/color_375587">
+                    <TextView
+                        style="@style/content_report_sumsl_text"
+                        android:id="@+id/hj1_val"
+                        android:text="0"/>
+                    <TextView
+                        style="@style/content_report_sum_text"
+                        android:id="@+id/hj1_title"
+                        android:text="总销量"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hj2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_5"
+                android:paddingRight="@dimen/padding_5"
+                android:visibility="gone">
+
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="vertical"
+                    android:background="@color/color_83d9b6">
+
+                    <TextView
+                        style="@style/content_report_sumsl_text"
+                        android:id="@+id/hj2_val"
+                        android:text="0"/>
+                    <TextView
+                        style="@style/content_report_sum_text"
+                        android:id="@+id/hj2_title"
+                        android:text="总销售额"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hj3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_5"
+                android:visibility="gone">
+
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="vertical"
+                    android:background="@color/color_3980ca">
+
+                    <TextView
+                        style="@style/content_report_sumsl_text"
+                        android:id="@+id/hj3_val"
+                        android:text="0"/>
+                    <TextView
+                        style="@style/content_report_sum_text"
+                        android:id="@+id/hj3_title"
+                        android:text="总毛利"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+    <com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/refresh_head" />
+        <com.cn.wti.entity.view.pulltorefresh.PullableRecyclerView
+            android:id="@+id/list_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"/>
+        <include layout="@layout/load_more" />
+
+    </com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout>
+
+</LinearLayout>

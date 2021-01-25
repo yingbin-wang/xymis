@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main_form"
+    android:background="@color/line">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40">
+        <include layout="@layout/layout_title_back"></include>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_18"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/woderenwu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/woderenwu" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_18"
+            android:paddingRight="@dimen/padding_18"
+            android:paddingBottom="@dimen/padding_18"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/wofaqide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/wofaqide"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/padding_18"
+            android:paddingRight="@dimen/padding_18"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/faqirenwu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/xinzengrenwu"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/color_66_90_150"
+                android:gravity="center_horizontal"
+                android:text="发起任务"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

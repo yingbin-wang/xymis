@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_form">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40">
+        <include layout="@layout/layout_title_myassignment_edit"></include>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/height_40"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:text="发起人"/>
+
+                    <TextView
+                        android:id="@+id/initiator_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <com.cn.wti.entity.view.custom.EditText_custom
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_80"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12"
+                    android:gravity="top"
+                    android:hint="日程详情"
+                    android:background="@null"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_60"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="vertical">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/start_first"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_20"
+                            android:gravity="center_horizontal"
+                            android:text=""/>
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/start_last"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_40"
+                            android:gravity="center_horizontal"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_59_154_251"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="vertical">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/end_first"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_20"
+                            android:gravity="center_horizontal"
+                            android:text=""/>
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/end_last"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_40"
+                            android:gravity="center_horizontal"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_59_154_251"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:text="重复"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/padding_12">
+
+                        <Spinner
+                            android:id="@+id/chongfu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:id="@+id/chongfu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:text="选择"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="@dimen/padding_12">
+
+                        <Spinner
+                            android:id="@+id/yue123"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+                        <Spinner
+                            android:id="@+id/riqi123"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                        <Spinner
+                            android:id="@+id/xiqi123"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/chongfu2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:text="参与人员"/>
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/cyzids"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/cyzs"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_80"
+                        android:gravity="top"
+                        android:visibility="gone"/>
+
+                    <LinearLayout
+                        android:id="@+id/cyzs_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_110"
+                        android:orientation="horizontal"
+                        android:gravity="top">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fillViewport="true"
+                            android:scrollbars="none" >
+
+                            <com.cn.wti.util.app.MyGridView
+                                android:id="@+id/main_gridview"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:horizontalSpacing="0.0dip"
+                                android:listSelector="@null"
+                                android:numColumns="4"
+                                android:scrollbars="none"
+                                android:stretchMode="columnWidth"
+                                android:verticalSpacing="0.0dip" />
+                        </ScrollView>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="@dimen/padding_10">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/richengtianjiab"
+                            android:id="@+id/cyzxz"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_12"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_vertical"
+                        android:text="提醒时间"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/txsj"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_40"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="@dimen/padding_12"
+                            android:hint="点击选择"
+                            style="@style/yincang_content"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_40"
+                            android:paddingLeft="@dimen/padding_12"
+                            android:id="@+id/select_txsj"
+                            android:gravity="center_vertical"
+                            android:background="#00000000"/>
+
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/chevron"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/tqdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/tqhour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/tqmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:id="@+id/end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/currentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/color5"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/currentDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/color5"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

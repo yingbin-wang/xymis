@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/rel_select"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/linearlayout_dialog_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40">
+            <include layout="@layout/layout_title_process_dialog"></include>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提醒"/>
+
+            <com.cn.wti.entity.view.custom.EditText_custom
+                android:id="@+id/tqdate"
+                android:layout_width="@dimen/height_80"
+                android:layout_height="@dimen/height_40"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="天"/>
+
+
+            <com.cn.wti.entity.view.custom.EditText_custom
+                android:id="@+id/tqhour"
+                android:layout_width="@dimen/height_80"
+                android:layout_height="@dimen/height_40"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="小时"/>
+
+            <com.cn.wti.entity.view.custom.EditText_custom
+                android:id="@+id/tqmin"
+                android:layout_width="@dimen/height_80"
+                android:layout_height="@dimen/height_40"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="10"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_10"
+                android:text="分钟"/>
+
+        </LinearLayout>
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/btnOK"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_white_btn"
+                android:text="确定"
+                android:textColor="#444444"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_white_btn"
+                android:text="取消"
+                android:textColor="#444444"
+                android:textSize="18sp" />
+        </LinearLayout>-->
+
+    </LinearLayout>
+</LinearLayout>

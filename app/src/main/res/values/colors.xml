@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="line">#ffd3dde6</color>
+
+    <color name="colorWhite">#ffff</color>
+
+    <color name="shiqing">#1685a9</color>
+    <color name="black">#000000</color>
+
+    <color name="black_01">#3c3c3c</color>
+    <color name="black_02">#4f4f4f</color>
+
+    <color name="rounded_container_border">#ffb7babb</color>
+
+    <!-- ITEM BACKGROUND COLOR - STATE - DEFAULT -->
+    <color name="base_start_color_default">#FFFFFF</color>
+    <color name="base_end_color_default">#FFFFFF</color>
+
+    <!-- ITEM BACKGROUND COLOR - STATE - PRESSED -->
+    <color name="base_start_color_pressed">#ff3590c4</color>
+    <color name="base_end_color_pressed">#ff2570ba</color>
+
+    <!-- ITEM TEXT COLORS - STATES - PRESSED AND DEFAULT -->
+    <color name="text_color_default">#000000</color>
+    <color name="text_color_pressed">#ffffff</color>
+
+    <color name="gray">#aaaaaa</color>
+    <color name="light_blue">#3980ca</color>
+
+    <color name="keyguard_text_color_normal">#ffffff</color>
+    <color name="keyguard_text_color_unlock">#a7d84c</color>
+    <color name="keyguard_text_color_soundoff">#ffffff</color>
+    <color name="keyguard_text_color_soundon">#e69310</color>
+    <color name="keyguard_text_color_decline">#fe0a5a</color>
+    <color name="keyguard_text_color_red">#900000</color>
+
+    <color name="color_66_90_150">#425A96</color>
+    <color name="color_59_154_251">#3B9AFB</color>
+    <color name="color_254_157_131">#FE9D83</color>
+    <color name="color_239_69_52">#EF4534</color>
+    <color name="color_100_100_100">#646464</color>
+    <color name="color_100_102_100">#99FFCC</color>
+    <color name="color_235_235_240">#EBEBF0</color>
+    <color name="color_246_246_246">#F6F6F6</color>
+    <color name="color_249_249_249">#F9F9F9</color>
+
+    <color name="color_004986">#004986</color>
+    <color name="color_3490c2">#3490c2</color>
+    <color name="color_190_87_80">#BE5750</color>
+    <color name="color_100_152_104">#649868</color>
+    <color name="color_24_120_200">#1878C8</color>
+    <color name="color_0_169_0">#00A900</color>
+    <color name="color_120_115_136">#787388</color>
+
+    <color name="color_f2f2f2">#f2f2f2</color>
+
+    <color name="color_ebebf0">#ebebf0</color>
+    <color name="color_6d6d6d">#6d6d6d</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_808080">#808080</color>
+
+
+    <color name="color_375587">#375587</color>
+    <color name="color_83d9b6">#83d9b6</color>
+    <color name="color_3980ca">#3980ca</color>
+    <color name="color_344a53">#344a53</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_007aff">#007aff</color>
+    <color name="color_425a96">#425a96</color>
+    <color name="color_bac6dd">#bac6dd</color>
+    <color name="color_ef4534">#ef4534</color>
+
+
+
+    <color name="background">#FFFFFF</color>
+    <color name="split_line">#11112233</color>
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
+
+    <color name="color1">#F0F0F0</color>
+    <color name="color2">#FFFFFF</color>
+    <color name="color3">#B0B0B0</color>
+    <color name="color4">#666666</color>
+    <color name="color5">#57C5E8</color>
+
+</resources>

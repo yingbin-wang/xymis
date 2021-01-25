@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/refresh_head" />
+    <com.cn.wti.entity.view.pulltorefresh.PullableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.dina.ui.widget.UIListTableView
+                android:id="@+id/tableView"
+                style="@style/UITableView"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
+
+            <LinearLayout
+                android:id="@+id/ts_llt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/tstb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/nodata"/>
+                <TextView
+                    android:id="@+id/tsxx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nodata"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.cn.wti.entity.view.pulltorefresh.PullableScrollView>
+
+    <include layout="@layout/load_more" />
+
+</com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout>

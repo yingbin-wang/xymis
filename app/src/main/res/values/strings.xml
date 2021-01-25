@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">新屹软件</string>
+    <string name="listview_editview_height">100</string>
+    <string name="listview_editview_textsize">14</string>
+
+    <!-- 登陆 提示信息 start -->
+    <string name="prompt_login_name">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登陆</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="ip_53">192.168.16.53</string>
+    <string name="ip_local">192.168.0.101</string>
+
+    <!-- 用户名提示框 -->
+    <string name="error_empty_eail">用户名不能为空</string>
+    <string name="error_invalid_email">无效用户名</string>
+
+    <!-- 密码提示框 -->
+    <string name="error_empty_password">密码不能为空</string>
+    <string name="error_invalid_password">无效密码</string>
+
+    <string name="error_login">无效用户名或密码</string>
+
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="message">提示信息</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
+
+    <!-- 登陆 提示信息 end -->
+    <string name="hint">请输入</string>
+    <!-- 待办任务 start -->
+    <string name="myTask_title">待办任务</string>
+    <string name="myTask_lv_name">任务名称</string>
+    <string name="myTask_lv_item_btn1">办理</string>
+    <string name="title_activity_my_task_edit_">MyTask_edit_Activity</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="myTask_edit_title">任务办理</string>
+    <!--字段名称 -->
+    <string name="myTask_lv_item_xh">NO</string>
+    <string name="myTask_lv_item_name">办理步骤</string>
+    <string name="myTask_lv_item_jbr">经办人</string>
+    <string name="myTask_lv_item_fqr">发起人</string>
+    <string name="myTask_lv_item_tjrq">提交日期</string>
+    <string name="myTask_lv_item_djh">单据号</string>
+    <string name="title_activity_fwq_address">FwqAddressActivity</string>
+    <string name="title_activity_fwq_address_add">Fwq_Address_addActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_my_task__examine">MyTask_ExamineActivity</string>
+
+
+    <!--采购管理-->
+    <string name="cgqgd_title">采购请购单</string>
+   <!-- 销售管理-->
+    <string name="xsdd_title">销售订单</string>
+    <string name="xsddzk_title">销售订单折扣</string>
+    <!--客户管理-->
+    <string name="khcysqd_title">客户出样申请单</string>
+    <string name="jbsqd_title">价保申请单</string>
+    <string name="ydfksqd_title">月度返款申请</string>
+    <string name="xldbjlsqd_title">销量达标奖励申请单</string>
+    <string name="khzpsqd_title">客户赠品申请单</string>
+    <string name="khsczcsqd_title">客户市场支持申请单</string>
+    <string name="khxysqd_title">客户信用申请单</string>
+    <string name="ysyqhksqd_title">应收延期回款申请单</string>
+    <string name="cxyfhsqd_title">超信用发货申请单</string>
+    <string name="khjgtzd_title">客户价格调整</string>
+    <!--仓库管理-->
+    <string name="nbjhsqd_title">内部借货申请单</string>
+    <!--财务管理-->
+    <string name="zzd_title">暂支单</string>
+    <string name="bxzfsqd_title">报销支付申请单</string>
+    <!--行政管理-->
+    <string name="qjsqd_title">请假申请单</string>
+    <string name="gcsqd_title">公出申请单</string>
+
+    <string name="xsrb_title">销售日报</string>
+
+    <!--任务管理-->
+    <string name="myask_title">代办流程</string>
+    <string name="myassignment_title">我的任务</string>
+    <string name="createTask_title">我发起的</string>
+    <string name="myapply_title">我的申请</string>
+    <string name="myannouncement_title">通知公告</string>
+    <string name="myannouncement_jsr">接收人员</string>
+    <string name="myannouncement_jsbm">接收部门</string>
+
+    <string name="notebook_title">记事本</string>
+    <string name="schedule_title">日程安排</string>
+    <string name="saledaily_title">销售日报</string>
+    <string name="systemmsg_title">系统消息</string>
+    <string name="signin_title">考勤</string>
+
+    <!--表单验证-->
+    <string name="int_text">不是一个大于零的正整数</string>
+    <string name="decimal_text">不是一个有效浮点数</string>
+    <string name="telphone_text">不是一个正确的手机号</string>
+    <string name="gddh_text">不是一个正确的固定电话</string>
+    <string name="date_text">不是一个正确的日期</string>
+    <string name="null_text">不能为空</string>
+
+    <string name="save_bdyf_text">本单应付不能为负数！</string>
+    <string name="save_bcdk_text">本次抵扣不能大于订单金额！</string>
+
+    <string name="save_text">保存失败</string>
+    <string name="save_check_text">审核状态，不允许修改！</string>
+    <string name="save_task_faqi_text">请先撤销</string>
+    <string name="save_sp_text">审批状态，不允许修改！</string>
+    <string name="save_save_text">保存状态，不允许修改！</string>
+    <string name="save_mxRepetition_text">明细中存在重复数据！</string>
+    <string name="err_saverule_notfound">保存验证配置文件格式不正确！</string>
+    <string name="err_oneData"> 必须存在一条明细！</string>
+
+    <string name="success_operation">操作成功</string>
+    <string name="success_resh">刷新成功</string>
+    <string name="nodata">无数据</string>
+    <string name="noqxdata">无访问权限</string>
+    <string name="connection_timeout">连接超时</string>
+    <string name="err_mxdata_notfound">配置文件格式异常,未找到明细数据</string>
+    <string name="err_data">数据异常</string>
+    <string name="err_bitmapdata">图片解析失败</string>
+    <string name="error_invalid_user">此用户无权限</string>
+    <string name="err_notnextdata">无下一步骤</string>
+    <string name="error_invalid_jsry">接收人员必须填写</string>
+    <string name="error_invalid_network">加载数据失败！请检查网路</string>
+    <string name="error_invalid_nodata">无符合条件的数据</string>
+    <string name="err_nobuzou">没有符合条件的步骤</string>
+    <!--我的任务-->
+    <string name="err_myassignment_completetime">完成时间不能为空</string>
+    <string name="err_myassignment_completeschedule">完成情况不能为空</string>
+    <string name="success_createtask_chexiao">撤销成功</string>
+
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
+
+    <!--销售日报-->
+    <string name="err_answer_one_notempty">发送消息不能为空</string>
+    <string name="user_info_hint">隐私政策与用户协议</string>
+
+    <string name="register_hint1">我已阅读并同意</string>
+    <string name="register_hint2">《新屹用户协议及隐私政策》</string>
+    <string name="login_btn1">同意</string>
+    <string name="login_btn2">拒绝</string>
+
+</resources>

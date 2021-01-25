@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin">
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_marginRight="10dp"
+   		android:focusable="false"
+   		android:clickable="false"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listv_item_height"
+        android:id="@+id/name"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"
+        android:layout_weight="2"/>
+
+    <com.cn.wti.entity.view.custom.EditText_custom
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listv_item_height"
+        android:background="@null"
+        android:id="@+id/jbr"
+        android:layout_weight="2"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/backadd"
+        android:id="@+id/jbrxz"/>
+
+
+</LinearLayout>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_form"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/myTask_mytab"
+        android:paddingBottom="60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40">
+            <include layout="@layout/layout_title_saledaily_edit"></include>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/dailytopbg"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical">
+
+                        <LinearLayout
+                            android:id="@+id/rqxz"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/dailycalendar"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:orientation="vertical"
+                            android:padding="@dimen/padding_2">
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:id="@+id/day_pv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="@dimen/padding_10"
+                                android:textSize="58px"
+                                android:textColor="@color/colorWhite"
+                                android:text="10" />
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:id="@+id/yearAndmonth_pv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18px"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/padding_12"
+                            android:paddingLeft="@dimen/height_30"
+                            android:paddingRight="@dimen/height_30"
+                            android:paddingBottom="@dimen/padding_10"
+                            android:orientation="vertical"
+                            android:background="@color/color_004986"
+                            android:alpha="0.3">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                    android:id="@+id/ysz"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="本月完成/预算(0.00/1.00)"
+                                    android:textColor="@color/colorWhite"/>
+
+                                <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                    android:id="@+id/baifenbi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:textColor="@color/colorWhite"
+                                    android:text="0.00%"/>
+                            </RelativeLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="@dimen/padding_12">
+                                <ProgressBar
+                                    android:id="@+id/jindutiao"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                                    android:minHeight="20dp"
+                                    android:maxHeight="20dp"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_40"
+                        android:gravity="center_horizontal|center_vertical">
+
+                        <ImageButton
+                            android:id="@+id/xinzengxiangqing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_saledaily_xinzengxiangqing"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/line"/>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/question_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical">
+                        </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_20"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:id="@+id/question_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:paddingRight="@dimen/padding_12"
+                    android:orientation="vertical"
+                    android:background="@color/colorWhite">
+
+                    <com.cn.wti.entity.view.custom.EditText_custom
+                        android:id="@+id/question"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_80"
+                        android:gravity="top"
+                        android:background="@null"
+                        android:hint="这里输入提交问题"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="@dimen/padding_12">
+
+                        <ImageView
+                            android:id="@+id/tijiao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_saledaily_tijiao"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/answer_recycleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical">
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/huifu_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical|right"
+        android:padding="@dimen/padding_10"
+        android:background="@color/line">
+
+        <com.cn.wti.entity.view.custom.EditText_custom
+            android:id="@+id/answer_one"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:gravity="top"
+            android:singleLine="true"
+            android:imeOptions="actionSend"
+            android:background="@color/colorWhite"
+            android:hint="回复内容"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reshData"
+        android:visibility="gone"/>
+</RelativeLayout>

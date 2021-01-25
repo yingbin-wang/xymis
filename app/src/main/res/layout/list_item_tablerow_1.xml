@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/layout_1_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+                android:id="@+id/list_1_1"
+                style="@style/content_report_content_text"
+                android:layout_weight="2"/>
+            <ImageView
+                android:layout_width="0.3dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/gray"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout_1_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+                android:id="@+id/list_1_2"
+                style="@style/content_report_content_text"
+                android:layout_weight="2"/>
+            <ImageView
+                android:layout_width="0.3dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+                android:id="@+id/list_1_3"
+                style="@style/content_report_content_text"
+                android:layout_weight="2"/>
+            <ImageView
+                android:layout_width="0.3dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1_4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        style="@style/content_report_content_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <com.cn.wti.entity.view.custom.textview.TextView_TableRow_custom
+                android:id="@+id/list_1_4"
+                style="@style/content_report_content_text"
+                android:layout_weight="2"/>
+            <ImageView
+                android:layout_width="0.3dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/gray"/>
+    </LinearLayout>
+
+</LinearLayout>

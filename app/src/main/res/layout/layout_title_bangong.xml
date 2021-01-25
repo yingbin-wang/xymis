@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/light_blue">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_gravity="fill_horizontal"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_12">
+
+            <TextView
+                android:id="@+id/main_title_name"
+                android:layout_toRightOf="@+id/main_title_back"
+                style="@style/title_text"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+<!--            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal"
+                android:id="@+id/ribao">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ribao"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_12"
+                    android:textSize="@dimen/textsize_15"
+                    android:textColor="@color/colorWhite"
+                    android:text="销售日报"
+                    />
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/renwu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/renwu"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_12"
+                    android:textSize="@dimen/textsize_15"
+                    android:textColor="@color/colorWhite"
+                    android:text="任务"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/kaoqin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/kaoqing"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_12"
+                    android:textSize="@dimen/textsize_15"
+                    android:textColor="@color/colorWhite"
+                    android:text="考勤"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/jishiben"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/jishiben"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_12"
+                    android:textSize="@dimen/textsize_15"
+                    android:textColor="@color/colorWhite"
+                    android:text="记事本"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hsv"
+    android:layout_width="wrap_content"
+    android:layout_height="80dip"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/itemContainer"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dip"
+            android:gravity="center_vertical"
+            style="@style/list_item_top">
+
+            <ImageView android:id="@+id/image" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="20dip"
+                android:layout_alignParentLeft="true">
+
+                <LinearLayout
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dip"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/title"
+                        style="@style/content_page_large_text"
+                        android:layout_weight="1"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subtitle"
+                        android:visibility="visible"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dip"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_1"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_2"
+                        android:visibility="visible"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_3"
+                        android:visibility="visible"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dip"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_4"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_5"
+                        android:visibility="visible"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:text="summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content_6"
+                        android:visibility="visible"
+                        style="@style/content_page_small_text"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chevron"
+                    style="@style/list_item_chevron"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_action"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/btn_edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/nbjhsqd"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:hint="查看"/>
+
+            <ImageButton
+                android:id="@+id/btn_delte"
+                android:layout_marginLeft="2dip"
+                android:layout_marginRight="2dip"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:paddingLeft="20dip"
+                android:paddingRight="20dip"
+                android:hint="删除" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</HorizontalScrollView>

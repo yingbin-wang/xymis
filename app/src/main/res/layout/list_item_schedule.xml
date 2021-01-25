@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/colorWhite"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:id="@+id/itemContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@dimen/height_70"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/scheduletime"
+                android:gravity="center">
+                <com.cn.wti.entity.view.custom.textview.TextView_custom
+                    android:text="title"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/title"
+                    android:visibility="visible"
+                    android:padding="@dimen/padding_5"
+                    style="@style/content_list_small_text"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical|center_horizontal">
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color3"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal">
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:background="@drawable/red01_dot_bg"
+                        android:gravity="center" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:stretchColumns="*">
+                    <TableRow>
+
+                        <LinearLayout android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="subtitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_30"
+                                android:id="@+id/subtitle"
+                                android:gravity="center_vertical"
+                                style="@style/content_list_small_text"
+                                android:layout_weight="1"/>
+                        </LinearLayout>
+
+                    </TableRow>
+                    <TableRow >
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/height_30"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="content_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/content_1"
+                                android:visibility="visible"
+                                style="@style/content_list_small_text"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" - "/>
+
+                            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                                android:text="content_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/content_2"
+                                style="@style/content_list_small_text"/>
+
+                        </LinearLayout>
+
+                    </TableRow>
+                    <TableRow>
+                        <ImageView  android:layout_width="match_parent" android:layout_height="1dp" android:layout_weight="1" android:background="@color/line" />
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/schedulemore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/schedulemore"
+                android:background="@drawable/button_bianpinghua_white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
