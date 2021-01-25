@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    style="@style/list_item_middle"
+    android:paddingLeft="@dimen/padding_10"
+    android:paddingRight="@dimen/padding_10">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/listv_item_height"
+        android:id="@+id/myTask_examine_lvItem_cb"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/listv_item_height"
+                android:id="@+id/myTask_examine_lvItem_name"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_12"/>
+
+            <LinearLayout
+                android:id="@+id/jbr_linear"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/listv_item_height"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingRight="@dimen/padding_10"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/listv_item_height"
+                        android:gravity="center_vertical|right"
+                        android:id="@+id/myTask_examine_lvItem_jbr"
+                        android:hint="点击选择"/>
+
+                    <TextView
+                        android:id="@+id/myTask_examine_lvItem_jbrxz"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/tb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/chevron"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+    </LinearLayout>
+
+</LinearLayout>

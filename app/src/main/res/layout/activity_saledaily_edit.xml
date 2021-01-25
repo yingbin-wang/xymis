@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_form">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40">
+        <include layout="@layout/layout_title_myassignment_edit"></include>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/height_40"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_12"
+            android:paddingRight="@dimen/padding_12"
+            android:gravity="center_vertical|center_horizontal">
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:id="@+id/jobtypeid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_40"
+                android:gravity="center_vertical"
+                android:text="工作类型"
+                style="@style/yincang_title"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.cn.wti.entity.view.custom.textview.TextView_custom
+                    android:id="@+id/jobtype_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_12"
+                    style="@style/yincang_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:id="@+id/select_jobtype_name"
+                    android:gravity="center_vertical"
+                    android:background="#00000000"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/chevron"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_12"
+            android:paddingRight="@dimen/padding_12"
+            android:gravity="center_vertical|center_horizontal">
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:id="@+id/customerid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_40"
+                android:gravity="center_vertical"
+                android:text="关联客户"
+                style="@style/yincang_title"/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.cn.wti.entity.view.custom.textview.TextView_custom
+                    android:id="@+id/customer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_12"
+                    style="@style/yincang_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:paddingLeft="@dimen/padding_12"
+                    android:id="@+id/select_khdn_name"
+                    android:gravity="center_vertical"
+                    android:background="#00000000"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/chevron"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_12"
+            android:paddingRight="@dimen/padding_12"
+            android:gravity="center_vertical|center_horizontal">
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_40"
+                android:gravity="center_vertical"
+                android:text="关联人员"
+                style="@style/yincang_title"/>
+
+            <com.cn.wti.entity.view.custom.EditText_custom
+                android:id="@+id/glry"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_40"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_12"
+                style="@style/yincang_content"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingLeft="@dimen/padding_12"
+            android:paddingRight="@dimen/padding_12">
+
+            <com.cn.wti.entity.view.custom.EditText_custom
+                android:id="@+id/gzzj"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/padding_5"
+                android:hint="请输入工作总结..."
+                android:gravity="top"
+                style="@style/edit_content"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

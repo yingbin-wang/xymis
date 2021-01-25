@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_60"
+        android:id="@+id/hjrow">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/hj1">
+                   <ImageButton
+                       android:id="@+id/back"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:background="@drawable/selector_jjyb_zb"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/hj2">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/rili"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="@color/color_66_90_150"
+                        android:textStyle="bold"
+                        android:id="@+id/hj2_val"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/content_report_sum_title_liner"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:id="@+id/hj3">
+                    <ImageButton
+                        android:id="@+id/go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_jjyb_yb"/>
+                </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/hjrow"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_below="@+id/title"/>
+
+    <LinearLayout
+        android:id="@+id/hj_linear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:gravity="center|center_vertical"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/wenzibg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/hj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_344a53"
+            android:text="合计"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

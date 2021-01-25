@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hsv"
+    android:layout_width="wrap_content"
+    android:layout_height="80dip"
+    android:scrollbars="none"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/itemContainer"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="60dip"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            style="@style/list_item_middle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                    <ImageView android:id="@+id/image" android:layout_width="wrap_content" android:layout_height="wrap_content"  />
+
+                    <com.cn.wti.entity.view.custom.textview.TextView_custom
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/title"
+                        android:textSize="@dimen/title_textsize"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="流程名称" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/subtitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/black"
+                            android:text="单据号"/>
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/content_1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/black"
+                            android:text="任务名称" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/content_2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_centerVertical="true"
+                            android:text="发启人" />
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/content_3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:text="经办人"/>
+
+                        <com.cn.wti.entity.view.custom.textview.TextView_custom
+                            android:id="@+id/content_4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_centerVertical="true"
+                            android:text="提交日期"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chevron"
+                    style="@style/list_item_chevron"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_action"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="@color/keyguard_text_color_red">
+                <TextView
+                    android:id="@+id/btn_cuiban"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:paddingLeft="20dip"
+                    android:paddingRight="20dip"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:text="催办"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</HorizontalScrollView>

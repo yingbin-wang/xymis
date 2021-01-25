@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/padding_5"
+    android:orientation="vertical"
+    android:id="@+id/main_form">
+
+    <!--<include layout="@layout/layout_title_02" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp"
+            android:id="@+id/myTask_examine_lv"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/padding_10"
+           android:background="@color/line"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_210"
+            android:paddingLeft="@dimen/padding_12"
+            android:paddingRight="@dimen/padding_12"
+            android:gravity="top"
+            android:hint="处理意见"
+            android:id="@+id/myTask_examine_msg"
+            android:background="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</LinearLayout>

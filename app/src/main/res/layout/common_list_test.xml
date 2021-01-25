@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/testView"
+        android:orientation="horizontal">
+        <com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/refresh_view">
+
+            <include layout="@layout/refresh_head" />
+
+            <com.cn.wti.entity.view.pulltorefresh.PullableRecyclerView
+                android:id="@+id/list_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical">
+            </com.cn.wti.entity.view.pulltorefresh.PullableRecyclerView>
+
+            <include layout="@layout/load_more" />
+
+        </com.cn.wti.entity.view.pulltorefresh.PullToRefreshLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ts_llt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/tstb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/nodata"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_12"
+            android:gravity="center_horizontal|center_vertical">
+            <TextView
+                android:id="@+id/tsxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nodata"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/isSelect"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_text"
+        android:visibility="gone"/>
+
+</RelativeLayout>

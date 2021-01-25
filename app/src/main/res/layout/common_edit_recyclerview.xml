@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/main_form">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.dina.ui.widget.UITableView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableView"
+                style="@style/UITableView" />
+
+            <!--  明细表一 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10"
+                android:id="@+id/mx1"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:background="@color/color_ebebf0"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_6d6d6d"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:id="@+id/mx1_title"
+                        android:text="明细1" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_cratetask_add"
+                            android:textColor="@color/colorWhite"
+
+                            android:id="@+id/mx1_add"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mx1_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--明细表二-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10"
+                android:visibility="gone"
+                android:id="@+id/mx2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:background="@color/color_ebebf0"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_6d6d6d"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:id="@+id/mx2_title"
+                        android:text="明细2" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_cratetask_add"
+                            android:textColor="@color/colorWhite"
+                            android:id="@+id/mx2_add"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mx2_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--明细表三-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10"
+                android:visibility="gone"
+                android:id="@+id/mx3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:background="@color/color_ebebf0"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_6d6d6d"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:id="@+id/mx3_title"
+                        android:text="明细3" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_cratetask_add"
+                            android:textColor="@color/colorWhite"
+
+                            android:id="@+id/mx3_add"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mx3_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+           <!-- 明细四-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10"
+                android:visibility="gone"
+                android:id="@+id/mx4">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:background="@color/color_ebebf0"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_6d6d6d"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:id="@+id/mx4_title"
+                        android:text="明细4" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_cratetask_add"
+                            android:textColor="@color/colorWhite"
+
+                            android:id="@+id/mx4_add"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mx4_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!-- 明细五-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_10"
+                android:visibility="gone"
+                android:id="@+id/mx5">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:background="@color/color_ebebf0"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_6d6d6d"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/padding_8"
+                        android:id="@+id/mx5_title"
+                        android:text="明细5" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_cratetask_add"
+                            android:textColor="@color/colorWhite"
+
+                            android:id="@+id/mx5_add"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/mx5_View"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
