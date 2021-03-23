@@ -92,7 +92,7 @@ public class Systemmsg_editActivity extends BaseEdit_NoTable_Activity{
         //时间
         updateOneUI(main_data, "senddate");
         //内容
-        updateOneUI(main_data, "msgcontent");
+        updateOneUI2(main_data, "msgcontent","html");
 
     }
 

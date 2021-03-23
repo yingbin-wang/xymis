@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -290,8 +291,69 @@ public class BaseEdit_NoTable_Activity extends BaseActivity implements View.OnCl
         }
 
         if (val.indexOf("<br>")>=0){
-            val = val.replaceAll("<br>","");
+            //val = val.replaceAll("<br>","");
+            val = Html.fromHtml(val).toString();
         }
+
+        if (view instanceof TextView_custom){
+            TextView_custom tv = (TextView_custom) view;
+            if (tv != null){
+                tv.setText(val);
+            }
+        }else if (view instanceof EditText_custom){
+            EditText_custom ev = (EditText_custom) view;
+            if (ev != null){
+                ev.setText(val);
+            }
+        }else if (view instanceof NoteEditText){
+            NoteEditText ev = (NoteEditText) view;
+            if (ev != null){
+                ev.setText(val);
+            }
+        }else if (view instanceof TextView){
+            TextView ev = (TextView) view;
+            if (ev != null){
+                ev.setText(val);
+            }
+        }else if (view instanceof EditText){
+            EditText ev = (EditText) view;
+            if (ev != null){
+                ev.setText(val);
+            }
+        }
+
+        //添加 到views 中
+        if (!key.equals("")){
+            view_names.add(key);
+        }
+        return  val;
+    }
+
+    public String updateOneUI2(Map<String,Object> map,String key,String type){
+        if (map == null){return ""; }
+        View view = findViewById(IDHelper.getViewID(getApplicationContext(),key));
+        String val="";
+        if(map.get(key)!= null){
+            val = map.get(key).toString();
+        }else{
+            val = "";
+        }
+
+        if(StringUtils.isNumeric(val) && val.length() == 13){
+            val = DateUtil.stampToDate(val);
+            if (DateUtil.isDate(val)){
+                map.put(key,val);
+            }
+        }
+
+        if (type != null && type.equals("html")){
+            val = Html.fromHtml(val).toString();
+        }else{
+            if (val.indexOf("<br>")>=0){
+                val = val.replaceAll("<br>","");
+            }
+        }
+
 
         if (view instanceof TextView_custom){
             TextView_custom tv = (TextView_custom) view;
