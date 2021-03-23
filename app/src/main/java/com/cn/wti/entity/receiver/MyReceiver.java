@@ -38,8 +38,6 @@ public class MyReceiver extends BroadcastReceiver {
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 		//登陆后接收消息
 		if (!AppUtils.login_state){return;}
-		boolean state = true;
-		if (state){return;}
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
             String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
             Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);

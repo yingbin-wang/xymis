@@ -292,7 +292,7 @@ public class MyTask_ExamineActivity extends BaseActivity {
         String taskId = processAttrMap.get("ID_").toString();
         String processInstanceId =processAttrMap.get("PROC_INST_ID_").toString(),
                 business = processAttrMap.get("BUSINESS_KEY_").toString(),
-                current_jbr = processAttrMap.get("USERNAME").toString(),
+                current_jbr = processAttrMap.get("USERNAME") == null ? "" : processAttrMap.get("USERNAME").toString(),
                 current_task_name = processAttrMap.get("NAME_").toString(),
                 PROC_DEF_NAME_ = processAttrMap.get("PROC_DEF_NAME_").toString();
         String spyj = msg.getText().toString();

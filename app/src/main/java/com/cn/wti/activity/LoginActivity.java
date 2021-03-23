@@ -233,8 +233,8 @@ public class LoginActivity extends Activity {
 
     private void addDefaultAccount() {
         ContentValues cv = new ContentValues();
-        cv.put("name","演示系统");
-        cv.put("address","114.84.66.250:666/wtmis");
+        cv.put("name","上海新屹");
+        cv.put("address","cs96.xysoft.xyz");
 
         dbUtils.exec_insert("sys_fwqaddress", cv);
     }
@@ -341,9 +341,9 @@ public class LoginActivity extends Activity {
         parms.put("USERNAME",email);
         parms.put("PASSWORD",password);
         if (TextUtils.isEmpty(AppUtils.book_name) || AppUtils.book_name.equals("bd") || AppUtils.book_name.equals("fwq")){
-            AppUtils.book_name = "test君海达";
+            AppUtils.book_name = "test融影1";
         }else if (AppUtils.book_name.equals("fwq")){
-            AppUtils.book_name = "上海融影";
+            AppUtils.book_name = "test融影1";
         }
         parms.put("database",AppUtils.book_name);
         if(AppUtils.app_address == null || AppUtils.app_address.equals("")){
