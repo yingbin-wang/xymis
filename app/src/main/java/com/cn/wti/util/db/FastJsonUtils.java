@@ -888,4 +888,35 @@ public class FastJsonUtils {
 		}
 		return jot;
 	}
+
+	public static Map<String,String> mapTOmapStr(Map<String,Object> map){
+		Set<String> keys = map.keySet();
+		Map<String,String> resMap = new HashMap<>();
+		for (String key1 : keys){
+			resMap.put(key1,map.get(key1).toString());
+		}
+		return resMap;
+	}
+
+	/**
+	 * 根据参数更新主数据
+	 * @param m
+	 * @param m2
+	 * @param params
+	 * @return
+	 */
+	public static String mapTOmapByParams(Map m,Map m2,Map<String,Object> params) {
+
+		String s = "";
+		Set<String> sets =  params.keySet();
+		for (String key:sets) {
+			Object o = m2.get(params.get(key));
+			if (o == null){
+				o = "";
+			}
+			m.put(key,o);
+		}
+
+		return JSONObject.toJSONString(m);
+	}
 }

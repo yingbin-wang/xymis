@@ -3,6 +3,7 @@ package com.dina.ui.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.cn.wti.util.app.AppUtils;
 import com.cn.wti.util.db.FastJsonUtils;
@@ -41,7 +42,7 @@ public class Custom_main_testClickListener  implements ClickListener {
     }
 
     @Override
-    public void onClick(final int index) {
+    public void onClick(final int index, View ObjectView) {
 
         Map<String,Object> parmsMap = new HashMap<String, Object>();
         Intent intent = new Intent();

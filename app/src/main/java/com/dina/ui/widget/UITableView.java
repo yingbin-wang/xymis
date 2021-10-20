@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -261,6 +262,8 @@ public class UITableView extends LinearLayout {
 					tempItemView = mInflater.inflate(R.layout.edit_item_middle_selectandwrite, null);
 				}else if(item.getType() == 7 ){
 					tempItemView = mInflater.inflate(R.layout.edit_item_middle2_03, null);
+				}else if (item.getType() == 10){
+					tempItemView = mInflater.inflate(R.layout.edit_item_middle2_upload, null);
 				}
 
 				if(item.getType() == 0){
@@ -301,7 +304,7 @@ public class UITableView extends LinearLayout {
 	 */
 	private void setupBasicItem(View view, BasicItem item, int index) {
 
-		View v;
+		final View v;
 		TextView_custom tc1 = null;
 		EditText_custom ec1 = null;
 
@@ -336,21 +339,34 @@ public class UITableView extends LinearLayout {
 				ec1.setCode(item.getCode());
 				ec1.setTitle(item.getTitle());
 
-				if (item.getType() == 3 || item.getType() == 4 || item.getType() == 9){
+				if (item.getType() == 3 || item.getType() == 4 || item.getType() == 9 || item.getType() == 10){
 					ec1.setEnabled(false);
 					ec1.setHint("点击选择");
 					TextView select_item = (TextView) view.findViewById(R.id.select_item);
 					select_item.setVisibility(View.VISIBLE);
 					if(item.isClickable()) {
-						if (item.getType() == 3 || item.getType() == 4 || item.getType() == 6 || item.getType() == 8 || item.getType() == 9){
-							((ImageView) view.findViewById(R.id.chevron)).setVisibility(View.VISIBLE);
+						if (item.getType() == 3 || item.getType() == 4 || item.getType() == 6 || item.getType() == 8 || item.getType() == 9 || item.getType() == 10){
+							if (item.getType() != 10){
+								((ImageView) view.findViewById(R.id.chevron)).setVisibility(View.VISIBLE);
+							}else{
+								Button upBtn = view.findViewById(R.id.chevron);
+								upBtn.setTag(index);
+								upBtn.setOnClickListener( new OnClickListener() {
+
+									@Override
+									public void onClick(View view) {
+										if(mClickListener != null)
+											mClickListener.onClick((Integer) view.getTag(),view);
+									}
+								});
+							}
 							select_item.setTag(index);
 							select_item.setOnClickListener( new OnClickListener() {
 
 								@Override
 								public void onClick(View view) {
 									if(mClickListener != null)
-										mClickListener.onClick((Integer) view.getTag());
+										mClickListener.onClick((Integer) view.getTag(),view);
 								}
 							});
 						}else{
@@ -578,7 +594,7 @@ public class UITableView extends LinearLayout {
 					@Override
 					public void onClick(View view) {
 						if(mClickListener != null)
-							mClickListener.onClick((Integer) view.getTag());
+							mClickListener.onClick((Integer) view.getTag(),view);
 					}
 
 				});

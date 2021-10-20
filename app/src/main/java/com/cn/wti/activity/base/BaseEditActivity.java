@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ObbInfo;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -71,7 +72,7 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
     protected MyAdapter2 myAdapter1,myAdapter2,myAdapter3,myAdapter4,myAdapter5;
     protected MyHandler myHandler;
     protected Dialog mDialog;
-    protected  int isEdit = 0;
+    protected  int isEdit = 0,request_code_file=100891,mClickIndex;
 
     private boolean isOnlyCheck = true,isCheck = true;
 
@@ -84,7 +85,7 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
      */
     protected  Map<String,Object> parms = new HashMap<String, Object>(),main_data,mxSetMap = new HashMap<String, Object>(),
             gsMap = new HashMap<String, Object>(),
-            gs_colsMap = new HashMap<String, Object>(),
+            gs_colsMap = new HashMap<String, Object>(),basicMap = new HashMap<String,Object>(),upLoadMap = new HashMap<>(),
             hqcolValMap= new HashMap<String, Object>(),
             actionMap = new HashMap<String, Object>(),
             ruleMap = new HashMap<String, Object>();
@@ -291,6 +292,8 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
                         } // 年 月*/
                         else if (map.get("is_select")!= null && map.get("is_select").toString().equals("是") && map.get("type")!= null && map.get("type").toString().equals("ny")) {
                             tableView.addBasicItem(code, name,value,0,true,9,gs_cols,gs, ruleMap.get(code).toString(), type, is_required);
+                        }else if (map.get("is_select")!= null && map.get("is_select").toString().equals("是") && map.get("type")!= null && map.get("type").toString().equals("upload")) {
+                            tableView.addBasicItem(code, name,value,0,true,10,gs_cols,gs, ruleMap.get(code).toString(), type, is_required);
                         }//只能选择
                         else if (map.get("is_select")!= null && map.get("is_select").toString().equals("是")) {
                             tableView.addBasicItem(code,name,value,qsh,true,3,gs_cols,gs,ruleMap.get(code).toString(),type,is_required);
@@ -407,6 +410,8 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
                         }// 年 月*/
                         else if (map.get("is_select")!= null && map.get("is_select").toString().equals("是") && map.get("type")!= null && map.get("type").toString().equals("ny")) {
                             tableView.addBasicItem(code, name, value,0,true,9,type,is_required);
+                        }else if (map.get("is_select")!= null && map.get("is_select").toString().equals("是") && map.get("type")!= null && map.get("type").toString().equals("upload")) {
+                            tableView.addBasicItem(code, name, value,0,true,10,type,is_required);
                         }else if (map.get("type")!= null && map.get("type").toString().equals("cbx")){
                             if(map.get("is_visible_phone")!= null && map.get("is_visible_phone").toString().equals("是")) {
                                 //是否可选
@@ -850,7 +855,7 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
         }
 
         @Override
-        public void onClick(final int index) {
+        public void onClick(final int index,View objectView) {
             /*Toast.makeText(xsdd_editActivity.this, "item clicked: " + index, Toast.LENGTH_SHORT).show();*/
             parms2 = parms1;
             /*获取表单格式*/
@@ -1060,9 +1065,45 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
                 /*DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil((Activity) mContext, dateq);
                 dateTimePicKDialog.dateTimePicKDialog_(tableView,v,basicItem,index,2);*/
 
+            }else if (map.get("type")!= null && map.get("type").toString().equals("upload")){
+                mClickIndex = index;
+                showFileList(map,index);
             }else{
                 Toast.makeText(mContext,"无选项功能",Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public static final String DOC = "application/msword";
+    public static final String DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    public static final String XLS = "application/vnd.ms-excel application/x-excel";
+    public static final String XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    public static final String PPT = "application/vnd.ms-powerpoint";
+    public static final String PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    public static final String PDF = "application/pdf";
+    public static final String IMAGE = "image/*";
+
+    private void showFileList(Map<String,Object>map,int index) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/pdf|image/*");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                    new String[]{IMAGE,PDF});
+        }
+        intent.putExtra("code",map.get("code").toString());
+        intent.putExtra("menucode",map.get("menucode").toString());
+        intent.putExtra("name",map.get("name").toString());
+        intent.putExtra("type",map.get("type").toString());
+        intent.putExtra("ywcode",map.get("ywcode").toString());
+        intent.putExtra("index",index);
+        this.basicMap = map;
+        //intent.putExtras(AppUtils.setParms("",map));
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
         }
     }
 

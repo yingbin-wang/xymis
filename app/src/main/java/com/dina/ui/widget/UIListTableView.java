@@ -286,7 +286,7 @@ public class UIListTableView extends LinearLayout {
 				@Override
 				public void onClick(View view) {
 					if(mClickListener != null)
-						mClickListener.onClick((Integer) view.getTag());
+						mClickListener.onClick((Integer) view.getTag(),view);
 				}
 				
 			});

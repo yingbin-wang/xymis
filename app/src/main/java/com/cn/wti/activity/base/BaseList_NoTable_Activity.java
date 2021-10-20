@@ -407,7 +407,7 @@ public class BaseList_NoTable_Activity extends Activity implements View.OnClickL
         }
 
         @Override
-        public void onClick(final int index) {
+        public void onClick(final int index,View objectView) {
 
             Map<String,Object> parmsMap = new HashMap<String, Object>();
             Intent intent = new Intent();

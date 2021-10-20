@@ -2,16 +2,36 @@ package com.cn.wti.activity.common;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.cn.wti.activity.base.BaseEdit_01Activity;
 import com.cn.wti.entity.System_one;
 import com.cn.wti.util.app.ActivityController;
+import com.cn.wti.util.app.AppUtils;
 import com.cn.wti.util.db.FastJsonUtils;
+import com.cn.wti.util.file.AlbumUtils;
+import com.cn.wti.util.file.FileUtil;
+import com.cn.wti.util.net.Net;
+import com.cn.wti.util.number.FileUtils;
+import com.cn.wti.util.number.IniUtils;
+import com.dina.ui.model.BasicItem;
 import com.wticn.wyb.wtiapp.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class CommonEditActivity extends BaseEdit_01Activity {
 
@@ -83,31 +103,54 @@ public class CommonEditActivity extends BaseEdit_01Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        Map<String,Object> resMap = null,dataMap = null,contentMap = null;
-        int index;
+        Map<String,Object> resMap = new HashMap<>(),dataMap = null,contentMap = null;
+        int index = 0;
         String res = "";
         if (intent == null){
             return;
         }
         System_one so = (System_one)intent.getSerializableExtra("parms");
         if(so == null){
-            return;
+            if (requestCode == request_code_file){
+                resMap.putAll(basicMap);
+            }else{
+                return;
+            }
+
+        }else{
+            resMap = so.getParms();
+            dataMap = FastJsonUtils.strToMap(resMap.get("data").toString());
+            index = Integer.parseInt(resMap.get("index").toString());
         }
-        resMap = so.getParms();
-        dataMap = FastJsonUtils.strToMap(resMap.get("data").toString());
-        index = Integer.parseInt(resMap.get("index").toString());
+
+        
         String type = resMap.get("type").toString(),class_name="",package_name,code;
         package_name = this.getClass().getPackage().getName();
         try {
             code = resMap.get("code").toString();
             //销售订单 字段 更新处理
-            updateXsddmx(menu_code,dataMap,code);
+            if (!type.equals("upload")){
+                updateXsddmx(menu_code,dataMap,code);
+            }
             //关联档案 套餐 赠品
             if (resMap.get("gldata")!= null){
                 List<Map<String,Object>> gldata = FastJsonUtils.getBeanMapList(resMap.get("gldata").toString());
                 List<Map<String,Object>> mxdata = FastJsonUtils.getBeanMapList(resMap.get("mxdata").toString());
                 List<Map<String,Object>> removedata = FastJsonUtils.getBeanMapList(resMap.get("removedata").toString());
                 ActivityController.updateMx(mContext,resultCode,gs_map,type,package_name,this,dataMap,index,gldata,mxdata,removedata);
+            }else if (type.equals("upload")){
+                //执行上传动作
+                resMap.put("field",resMap.get("code"));
+                resMap.put("code",main_data.get("code"));
+                String tempId = "";
+                if (main_data.get("id") == null || TextUtils.isEmpty(main_data.get("id").toString())){
+                    tempId = IniUtils.getFixLenthString(5);
+                }else{
+                    tempId = main_data.get("id").toString();
+                }
+                resMap.put("id",tempId);
+                resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
+                uploadFile(resMap);
             }else{
                 ActivityController.updateMx(mContext,resultCode,gs_map,type,package_name,this,dataMap,index);
             }
@@ -121,6 +164,57 @@ public class CommonEditActivity extends BaseEdit_01Activity {
         //计算规则
         boolean falge = calculateGz();
 
+    }
+
+    private void uploadFile(final Map<String,Object> resMap) {
+        try {
+            Net.UPLOAD_URL = AppUtils.app_address+"/menu/uploadFileToQiniu";
+            File file = new File(resMap.get("filePath").toString());
+            byte[] buffer = FileUtils.File2Bytes(file);
+            Net.upload(Net.UPLOAD_URL, file.getName(), buffer, FastJsonUtils.mapTOmapStr(resMap), new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    final String responseStr = response.body().string();
+
+                    if(200 <= response.code() && response.code() <= 299){
+                        final JSONObject json = JSONObject.parseObject(responseStr);
+                        if(json.getString("status").equals("ok")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(mContext,mContext.getString(R.string.upload_succeed),Toast.LENGTH_SHORT).show();
+                                    if (json.get("fileDetail") != null){
+                                        Map<String,Object> restMap1 = (Map)parms.get(resMap.get("field").toString()+"_upload");
+                                        if (restMap1 != null){
+                                            upLoadMap.putAll(restMap1);
+                                            JSONArray jsonArray = (JSONArray) json.get("fileDetail");
+                                            if (jsonArray != null && jsonArray.size() == 1){
+                                                Map<String,Object> m2 = FastJsonUtils.strToMap(jsonArray.get(0).toString());
+                                                FastJsonUtils.mapTOmapByParams(main_data,m2,upLoadMap);
+                                                ActivityController.updateBasicItem(tableView,(BasicItem) tableView.getItem(mClickIndex),main_form,mClickIndex,m2.get("filename").toString());
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+
+                        }else{
+                            Toast.makeText(mContext,mContext.getString(R.string.upload_fail),Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(mContext,mContext.getString(R.string.upload_fail),Toast.LENGTH_SHORT).show();
+                    }
+                    Log.d(getClass().getName(), responseStr);
+                }
+            });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public boolean updateXsddmx(String menu_code,Map<String,Object>dataMap,String code){

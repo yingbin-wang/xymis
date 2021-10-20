@@ -257,7 +257,7 @@ public class BaseFragment_List extends Fragment {
         }
 
         @Override
-        public void onClick(final int index) {
+        public void onClick(final int index,View objectView) {
 
             Map<String,Object> parmsMap = new HashMap<String, Object>();
             Intent intent = new Intent();

@@ -1,6 +1,8 @@
 package com.cn.wti.util.number;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -12,11 +14,15 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -178,4 +184,88 @@ public class FileUtils {
         }
 
     }
+
+    public static String getPath(Context context, Uri uri) {
+
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+            String[] projection = { "_data" };
+            Cursor cursor = null;
+
+            try {
+                cursor = context.getContentResolver().query(uri, projection,null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow("_data");
+                if (cursor.moveToFirst()) {
+                    String aPath =  cursor.getString(column_index);
+                    if (aPath == null){
+                        aPath = uri.getPath();
+                    }
+                    return aPath;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    public static File uri2File(Context context ,Uri uri) {
+        String img_path;
+
+        String[] proj = {MediaStore.Images.Media.DATA};
+
+        Cursor actualimagecursor = context.getContentResolver().query(uri, proj, null,
+
+                null, null);
+
+        if (actualimagecursor == null) {
+            img_path = uri.getPath();
+
+        } else {
+            int actual_image_column_index = actualimagecursor
+
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+            actualimagecursor.moveToFirst();
+
+            img_path = actualimagecursor
+
+                    .getString(actual_image_column_index);
+
+        }
+
+        File file = new File(img_path);
+
+        return file;
+
+    }
+
+    public static String uriToBase64(Context mContext,Uri uri){
+        File file1 = new File(getPath(mContext,uri));
+        return Base64.encodeToString(File2Bytes(file1),Base64.DEFAULT);
+    }
+
+    public static byte[] File2Bytes(File file) {
+        int byte_size = 1024;
+        byte[] b = new byte[byte_size];
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream(
+                    byte_size);
+            for (int length; (length = fileInputStream.read(b)) != -1;) {
+                outputStream.write(b, 0, length);
+            }
+            fileInputStream.close();
+            outputStream.close();
+            return outputStream.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

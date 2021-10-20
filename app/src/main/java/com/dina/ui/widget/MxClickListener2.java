@@ -63,7 +63,7 @@ public class MxClickListener2 implements ClickListener {
     }
 
     @Override
-    public void onClick(final int index) {
+    public void onClick(final int index,View objectView) {
         basicItem = (BasicItem) _basicItemList.get(index);
         Intent intent = new Intent();
         parmsMap = new HashMap<String, Object>();

@@ -125,6 +125,7 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
             approvalstatus = 0;
         }
 
+        setMenuVisible(menu.findItem(R.id.upload),true);
         if(main_data.get("estatus") != null && estatus == 7){
             //setMenuVisible(menu.findItem(R.id.add),true);
             setMenuVisible(menu.findItem(R.id.save),true);
@@ -160,6 +161,7 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
             setMenuVisible(menu.findItem(R.id.delete),false);
             setMenuVisible(menu.findItem(R.id.check),false);
             setMenuVisible(menu.findItem(R.id.uncheck),false);
+            setMenuVisible(menu.findItem(R.id.upload),false);
         }
 
         this.getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
@@ -635,6 +637,8 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
             if (qxMap.get("uncheckQx")!= null && qxMap.get("uncheckQx").toString().equals("true")){
                 menu.addSubMenu(0,R.id.uncheck,5,"撤审");
             }
+
+            menu.addSubMenu(0,R.id.upload,6,"上传");
         }
         return  menu;
     }

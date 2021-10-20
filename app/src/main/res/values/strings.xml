@@ -40,7 +40,8 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
-
+    <string name="upload_succeed">上传成功</string>
+    <string name="upload_fail">上传失败</string>
 
     <!-- 登陆 提示信息 end -->
     <string name="hint">请输入</string>

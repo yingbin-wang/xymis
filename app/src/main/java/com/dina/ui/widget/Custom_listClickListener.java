@@ -51,7 +51,7 @@ public class Custom_listClickListener implements  ClickListener {
     }
 
     @Override
-    public void onClick(int index) {
+    public void onClick(int index,View ObjectView) {
 
     }
 

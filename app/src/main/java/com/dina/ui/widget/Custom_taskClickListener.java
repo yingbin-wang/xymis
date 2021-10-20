@@ -3,6 +3,7 @@ package com.dina.ui.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import com.cn.wti.util.app.AppUtils;
@@ -53,7 +54,7 @@ public class Custom_taskClickListener implements  ClickListener {
     }
 
     @Override
-    public void onClick(final int index) {
+    public void onClick(final int index, View objectView) {
 
         if (tableView != null){
             _dataList = tableView.get_dataList();

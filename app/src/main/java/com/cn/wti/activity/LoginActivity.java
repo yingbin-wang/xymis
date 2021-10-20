@@ -341,7 +341,7 @@ public class LoginActivity extends Activity {
         parms.put("USERNAME",email);
         parms.put("PASSWORD",password);
         if (TextUtils.isEmpty(AppUtils.book_name) || AppUtils.book_name.equals("bd") || AppUtils.book_name.equals("fwq")){
-            AppUtils.book_name = "test融影1";
+            AppUtils.book_name = "测试裕珑2";
         }else if (AppUtils.book_name.equals("fwq")){
             AppUtils.book_name = "test融影1";
         }

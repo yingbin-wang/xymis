@@ -262,7 +262,7 @@ public class BaseListFragment extends BaseActivity implements ActionBar.TabListe
         }
 
         @Override
-        public void onClick(final int index) {
+        public void onClick(final int index,View objectView) {
 
             Map<String,Object> parmsMap = new HashMap<String, Object>();
             Intent intent = new Intent();
