@@ -22,4 +22,10 @@
         android:hint="服务器地址"
         android:id="@+id/fwq_add_address"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="文件存放地址"
+        android:id="@+id/fwq_file_address"/>
+
 </LinearLayout>

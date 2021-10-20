@@ -22,13 +22,16 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.cn.wti.activity.web.FilePreviewActivity;
 import com.cn.wti.entity.Sys_user;
 import com.cn.wti.entity.adapter.MyAdapter2;
 import com.cn.wti.entity.adapter.handler.MyHandler;
 import com.cn.wti.entity.avalidations.EditTextValidator;
 import com.cn.wti.entity.parms.ListParms;
+import com.cn.wti.entity.view.custom.Button_custom;
 import com.cn.wti.entity.view.custom.date.CustomDatePicker;
 import com.cn.wti.entity.view.custom.dialog.window.MultiChoicePopWindow_CheckTask;
+import com.cn.wti.entity.view.custom.textview.TextView_custom;
 import com.cn.wti.util.Constant;
 import com.cn.wti.util.app.TableUtils;
 import com.cn.wti.util.app.qx.BussinessUtils;
@@ -1067,7 +1070,7 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
 
             }else if (map.get("type")!= null && map.get("type").toString().equals("upload")){
                 mClickIndex = index;
-                showFileList(map,index);
+                showFileList(map,index,objectView);
             }else{
                 Toast.makeText(mContext,"无选项功能",Toast.LENGTH_SHORT).show();
             }
@@ -1083,28 +1086,39 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
     public static final String PDF = "application/pdf";
     public static final String IMAGE = "image/*";
 
-    private void showFileList(Map<String,Object>map,int index) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/pdf|image/*");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent.putExtra(Intent.EXTRA_MIME_TYPES,
-                    new String[]{IMAGE,PDF});
-        }
-        intent.putExtra("code",map.get("code").toString());
-        intent.putExtra("menucode",map.get("menucode").toString());
-        intent.putExtra("name",map.get("name").toString());
-        intent.putExtra("type",map.get("type").toString());
-        intent.putExtra("ywcode",map.get("ywcode").toString());
-        intent.putExtra("index",index);
-        this.basicMap = map;
-        //intent.putExtras(AppUtils.setParms("",map));
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
+    private void showFileList(Map<String,Object>map,int index,View view) {
+        if (view instanceof Button_custom){
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/pdf|image/*");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                        new String[]{IMAGE,PDF});
+            }
+            intent.putExtra("code",map.get("code").toString());
+            intent.putExtra("menucode",map.get("menucode").toString());
+            intent.putExtra("name",map.get("name").toString());
+            intent.putExtra("type",map.get("type").toString());
+            intent.putExtra("ywcode",map.get("ywcode").toString());
+            intent.putExtra("index",index);
+            this.basicMap = map;
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        try {
-            startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
+            try {
+                startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
+            }
+        }else if (view instanceof TextView_custom){
+            //打开webview 显示数据
+            Intent intent = new Intent(mContext,FilePreviewActivity.class);
+            Map<String,Object> parmsMap = new HashMap<String, Object>();
+            parmsMap.put("title","文件预览");
+            parmsMap.put("fileName",main_data.get(map.get("code")));
+            parmsMap.put("filePath",main_data.get(map.get("code")+"_filepath") == null ? main_data.get("newfilename") : main_data.get(map.get("code")+"_filepath"));
+            intent.putExtras(AppUtils.setParms("",parmsMap));
+            startActivity(intent);
         }
+
     }
 
     /**

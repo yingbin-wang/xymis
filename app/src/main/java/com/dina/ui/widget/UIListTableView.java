@@ -538,7 +538,7 @@ public class UIListTableView extends LinearLayout {
 				case  R.id.btn_edit:
 					if(mClickListener != null){
 						v = mListContainer.getChildAt(postion);
-						mClickListener.onClick((Integer) v.getTag());
+						mClickListener.onClick((Integer) v.getTag(),view);
 					}
 					break;
 				case R.id.btn_delte:

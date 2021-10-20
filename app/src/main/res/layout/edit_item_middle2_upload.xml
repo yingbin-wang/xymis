@@ -30,10 +30,10 @@
                 android:layout_height="@dimen/height_40"
                 android:gravity="center_vertical|center_horizontal">
 
-                <com.cn.wti.entity.view.custom.EditText_custom
+                <com.cn.wti.entity.view.custom.textview.TextView_custom
                     android:text="summary"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/height_40" android:enabled="false"
+                    android:layout_height="@dimen/height_40"
                     android:layout_weight="1"
                     android:id="@+id/subtitle"
                     android:visibility="visible"
@@ -47,20 +47,15 @@
                     android:id="@+id/right_lint">
                     <com.cn.wti.entity.view.custom.Button_custom
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:id="@+id/chevron"
                         android:text="上传"
-                        android:visibility="visible"/>
+                        android:visibility="visible"
+                        android:textSize="10sp"/>
 
                 </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_40"
-                android:id="@+id/select_item"
-                android:visibility="gone"/>
 
         </RelativeLayout>
 

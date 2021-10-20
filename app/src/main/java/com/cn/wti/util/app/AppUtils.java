@@ -67,7 +67,7 @@ import java.util.Map;
 public class AppUtils {
 
     public  static  String app_name;
-    public  static  String app_address,book_name;
+    public  static  String app_address,book_name,file_address="file.newstanding.com";
     public  static  String app_ip,nw_ip;
     public  static  String app_userid,app_username,huanxincode,huanxinpassword,app_ioc,version="";
     public  static  boolean huanxin_state = false,network_state = true,fwq_state = true,update_state = false,login_state = false;

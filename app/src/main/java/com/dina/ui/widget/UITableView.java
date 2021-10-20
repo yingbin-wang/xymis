@@ -328,6 +328,27 @@ public class UITableView extends LinearLayout {
 					test.setBackgroundColor(getResources().getColor(shiqing));
 					LinearLayout right_lint= (LinearLayout) view.findViewById(R.id.right_lint);
 					right_lint.setVisibility(GONE);
+				}else if (item.getType() == 10){
+					Button upBtn = view.findViewById(R.id.chevron);
+					upBtn.setTag(index);
+					upBtn.setOnClickListener( new OnClickListener() {
+
+						@Override
+						public void onClick(View view) {
+							if(mClickListener != null)
+								mClickListener.onClick((Integer) view.getTag(),view);
+						}
+					});
+
+					v.setTag(index);
+					v.setOnClickListener( new OnClickListener() {
+
+						@Override
+						public void onClick(View view) {
+							if(mClickListener != null)
+								mClickListener.onClick((Integer) view.getTag(),view);
+						}
+					});
 				}
 
 				tc1.setCode(item.getCode());
@@ -342,8 +363,17 @@ public class UITableView extends LinearLayout {
 				if (item.getType() == 3 || item.getType() == 4 || item.getType() == 9 || item.getType() == 10){
 					ec1.setEnabled(false);
 					ec1.setHint("点击选择");
-					TextView select_item = (TextView) view.findViewById(R.id.select_item);
-					select_item.setVisibility(View.VISIBLE);
+					View select_item = null;
+					if (item.getType() != 10){
+						select_item = view.findViewById(R.id.select_item);
+						select_item.setVisibility(View.VISIBLE);
+					}else{
+						EditText_custom select_item1 = view.findViewById(R.id.subtitle);
+						select_item1.setMovementMethod(null);
+						select_item1.setKeyListener(null);
+						select_item = select_item1;
+					}
+
 					if(item.isClickable()) {
 						if (item.getType() == 3 || item.getType() == 4 || item.getType() == 6 || item.getType() == 8 || item.getType() == 9 || item.getType() == 10){
 							if (item.getType() != 10){

@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class FwqAddress_addActivity extends Activity {
 
-    private EditText fwq_add_name,fwq_add_address;
+    private EditText fwq_add_name,fwq_add_address,fwq_file_address;
     private DatabaseUtils dbUtils = null;
     private ImageButton ib_back,ib_ok;
     private TextView tv_title;
@@ -46,6 +46,7 @@ public class FwqAddress_addActivity extends Activity {
 
         fwq_add_address = (EditText) findViewById(R.id.fwq_add_address);
         fwq_add_name = (EditText)findViewById(R.id.fwq_add_name);
+        fwq_file_address = (EditText) findViewById(R.id.fwq_file_address);
         
         refshData();
 
@@ -63,10 +64,12 @@ public class FwqAddress_addActivity extends Activity {
         parmsMap = so.getParms();
         String name = AppUtils.getMapVal(parmsMap,"name").toString();
         String address = AppUtils.getMapVal(parmsMap,"address").toString();
+        String file_address = AppUtils.getMapVal(parmsMap,"file_address").toString();
         String type = AppUtils.getMapVal(parmsMap,"type").toString();
 
         if(type.equals("edit") ){
             fwq_add_address.setText(address) ;
+            fwq_file_address.setText(file_address);
             fwq_add_name.setText(name);
         }
     }

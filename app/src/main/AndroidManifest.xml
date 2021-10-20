@@ -108,6 +108,10 @@
             android:theme="@style/MyTheme.title"/>
 
         <activity
+            android:name="com.cn.wti.activity.web.FilePreviewActivity" android:screenOrientation="portrait"
+            android:theme="@style/MyTheme.title"/>
+
+        <activity
             android:name="com.cn.wti.activity.LoginActivity" android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
