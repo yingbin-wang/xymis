@@ -4147,10 +4147,42 @@ public class ActivityController {
         Context mContext = context;
         Object filePath = map.get("filePath") == null ? map.get("newfilename") : map.get("filePath");
         String fileTemp = filePath == null ? "" : filePath.toString();
-        if (map.get("fileName").toString().indexOf("pdf") != -1){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);
+        String type ="",fileName = map.get("fileName").toString();
+
+        if (fileName.indexOf("pdf") != -1 || fileName.indexOf("doc") != -1 || fileName.indexOf("docx") != -1 || fileName.indexOf("xls") != -1 || fileName.indexOf("xlsx") != -1
+            || fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1){
+            if (fileName.indexOf("pdf") != -1){
+                type = Constant.PDF;
+            }else if (fileName.indexOf("doc") != -1){
+                type = Constant.DOC;
+            }else if (fileName.indexOf("docx") != -1){
+                type = Constant.DOCX;
+            }else if (fileName.indexOf("xls") != -1){
+                type = Constant.XLS;
+            }else if (fileName.indexOf("xlsx") != -1){
+                type = Constant.XLSX;
+            }else if (fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1){
+                type = Constant.IMAGE;
+            }
+
+            intent.setDataAndType(uri, type);
+            ((Activity)mContext).startActivity(intent);
+        }else{
+            intent = new Intent(mContext,FilePreviewActivity.class);
+            Map<String,Object> parmsMap = new HashMap<String, Object>();
+            parmsMap.put("title","文件预览");
+            parmsMap.put("fileName",map.get("fileName"));
+            parmsMap.put("filePath",filePath == null ? "" : filePath);
+            intent.putExtras(AppUtils.setParms("",parmsMap));
+            ((Activity)mContext).startActivity(intent);
+        }
+
+        /*if (map.get("fileName").toString().indexOf("pdf") != -1){
             Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);
-            intent.setDataAndType(uri, "application/pdf");
+            intent.setDataAndType(uri, Constant.PDF);
             ((Activity)mContext).startActivity(intent);
         }else{
             Intent intent = new Intent(mContext,FilePreviewActivity.class);
@@ -4160,7 +4192,7 @@ public class ActivityController {
             parmsMap.put("filePath",filePath == null ? "" : filePath);
             intent.putExtras(AppUtils.setParms("",parmsMap));
             ((Activity)mContext).startActivity(intent);
-        }
+        }*/
     }
 
     /**
