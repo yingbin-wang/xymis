@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:id="@+id/itemContainer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.cn.wti.entity.view.custom.textview.TextView_custom
+                android:id="@+id/item_file_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_40"
+                android:layout_weight="1"
+                android:textSize="13sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                style="@style/yincang_content_"/>
+
+            <ImageView
+                android:id="@+id/item_file_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_saledaily_delete"/>
+
+        </LinearLayout>
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"/>
+
+    </LinearLayout>
+
+</LinearLayout>

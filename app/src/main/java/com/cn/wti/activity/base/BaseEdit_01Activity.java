@@ -247,6 +247,10 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
                 msg.sendToTarget();
                 //audit(mContext,"auditAll",pars);
                 break;
+            case R.id.upload:
+                main_data.put("menucode",menu_code);
+                ActivityController.startMyFileActivity(mContext,main_data);
+                break;
             default:
                 break;
         }
@@ -638,7 +642,7 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
                 menu.addSubMenu(0,R.id.uncheck,5,"撤审");
             }
 
-            menu.addSubMenu(0,R.id.upload,6,"上传");
+            menu.addSubMenu(0,R.id.upload,6,"附件");
         }
         return  menu;
     }

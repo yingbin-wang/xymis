@@ -95,7 +95,7 @@ public class Fragment_Bangong extends Fragment {
 							startActivityForResult(intent,1);
 						}
 					}else if (img_text[position].equals("销售日报")){
-						testClass = ReflectHelper.getCalss("com.cn.wti.activity.rwgl.saledaily.SalesdailyActivity");
+						testClass = ReflectHelper.getCalss("com.cn.wti.activity.rwgl.saledaily.MyFileActivity");
 						/*if (testClass != null) {
 							intent.setClass(rootView.getContext(), testClass);
 							startActivity(intent);
@@ -256,7 +256,7 @@ public class Fragment_Bangong extends Fragment {
 				/*case R.id.ribao:
 
 					if (ActivityController.checkQx("SellDaily")){
-						intent.setClass(getContext(), SalesdailyActivity.class);
+						intent.setClass(getContext(), MyFileActivity.class);
 						startActivity(intent);
 					}else{
 						Toast.makeText(getActivity(),getString(R.string.error_invalid_user),Toast.LENGTH_SHORT).show();

@@ -109,4 +109,43 @@ public class Net {
 
         client.newCall(request).enqueue(callback);
     }
+
+    /**
+     * 发送一个post请求
+     * @param url
+     * @param params
+     * @param callback
+     * @throws IOException
+     */
+    public static void post(String url, final Map<String,String> params, Callback callback) throws IOException {
+
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+
+        StringBuffer urlParams = new StringBuffer();
+        String token = null;
+        String sec = null;
+        if(params != null){
+            token = params.get("oauth_token");sec = params.get("oauth_token_secret");token = "122312";sec = "sfgs4353423";
+            Iterator<String> iter = params.keySet().iterator();
+            while(iter.hasNext()){
+                String k = iter.next();
+                urlParams.append(k+"="+params.get(k)+"&");
+            }
+        }
+        builder.addFormDataPart("v_",AppUtils.user.get_version());
+        RequestBody requestBody = builder.build();
+
+        String addr = "http://"+AppUtils.app_address+"/"+url + "?" + urlParams.toString()+"&v_="+AppUtils.user.get_version();
+        Log.d(Net.class.getName(), addr);
+        init();
+        Request request = new Request.Builder()
+                .header("oauth_token", token)
+                .header("oauth_token_secret", sec)
+                .url(addr)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(callback);
+    }
 }

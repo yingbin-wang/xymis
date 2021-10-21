@@ -31,5 +31,5 @@
         android:id="@+id/upload"
         android:icon="@mipmap/documentmore"
         app:showAsAction="always"
-        android:title="上传附件"/>
+        android:title="附件"/>
 </menu>

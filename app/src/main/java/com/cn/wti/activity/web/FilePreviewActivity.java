@@ -3,6 +3,7 @@ package com.cn.wti.activity.web;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -57,6 +58,12 @@ public class FilePreviewActivity extends Activity {
         webSettings.setBuiltInZoomControls(true);
         //不显示webview缩放按钮
         webSettings.setDisplayZoomControls(false);
+        webSettings.setUseWideViewPort(true);//让webview读取网页设置的viewport，pc版网页
+
+        //自适应屏幕
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadWithOverviewMode(true);
+
         String url = "";
         if (AppUtils.isIp(AppUtils.app_address)){
             url = "http://"+AppUtils.app_address+":8080/menu/previewFile?fileName="+parmsMap.get("fileName").toString()+"&filePath="+"http://"+AppUtils.file_address+"/"+parmsMap.get("filePath");
@@ -82,6 +89,31 @@ public class FilePreviewActivity extends Activity {
                 wv.loadUrl(url);
                 return true;
             }
+
+            @Override
+            public void onPageFinished(WebView webView, String url) {
+                super.onPageFinished(webView, url);
+
+
+                /**
+                 * 针对 web 页面 【不同分辨率】 适配处理   同dpi 不同分辨率 显示一致
+                 *  zoom = 100%    分辨率 1920 * 1080   Ui设置设计出来合适的 也是body标签默认未设置zoom属性的或者100%  例子 <body style="zoom: 50%;">
+                 *  zoom = 66.67%     分辨率 1280 * 720
+                 *  zoom = 71.14%     分辨率 1366 * 768
+                 *  zoom = 106.67%     分辨率 2048 * 1152
+                 *  zoom = 83.33%     分辨率 1600 * 900
+                 *  zoom = 50%     分辨率 960 * 540
+                 */
+                float widthPixels = getResources().getDisplayMetrics().widthPixels;
+                float heightPixels = getResources().getDisplayMetrics().heightPixels;
+                Log.d("zfq", "widthPixels:" + widthPixels);
+                Log.d("zfq", "heightPixels:" + heightPixels);
+                float zoomPercent = widthPixels / 960 * 100;
+                Log.d("zfq", "zoomPercent:" + zoomPercent);
+                String javaScriptInterfaceName_zoomWeb_NeedInjectJsStr =
+                        "javascript:(function(){  document.body.style.zoom='" + zoomPercent + "%'; })()";
+                wv.loadUrl(javaScriptInterfaceName_zoomWeb_NeedInjectJsStr);
+            }
         });
 
     }
@@ -97,4 +129,5 @@ public class FilePreviewActivity extends Activity {
             }
         }
     }
+
 }

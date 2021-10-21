@@ -1077,22 +1077,13 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
         }
     }
 
-    public static final String DOC = "application/msword";
-    public static final String DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-    public static final String XLS = "application/vnd.ms-excel application/x-excel";
-    public static final String XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    public static final String PPT = "application/vnd.ms-powerpoint";
-    public static final String PPTX = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-    public static final String PDF = "application/pdf";
-    public static final String IMAGE = "image/*";
-
     private void showFileList(Map<String,Object>map,int index,View view) {
         if (view instanceof Button_custom){
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("application/pdf|image/*");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 intent.putExtra(Intent.EXTRA_MIME_TYPES,
-                        new String[]{IMAGE,PDF});
+                        new String[]{Constant.IMAGE,Constant.PDF});
             }
             intent.putExtra("code",map.get("code").toString());
             intent.putExtra("menucode",map.get("menucode").toString());

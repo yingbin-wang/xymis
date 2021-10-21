@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -48,7 +49,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.ObjectArrayCodec;
 import com.baidu.mapapi.http.HttpClient;
+import com.cn.wti.activity.rwgl.myfile.MyFileActivity;
 import com.cn.wti.activity.tab.MyFragmentActivity;
+import com.cn.wti.activity.web.FilePreviewActivity;
 import com.cn.wti.entity.Sys_user;
 import com.cn.wti.entity.adapter.MyAdapter2;
 import com.cn.wti.entity.adapter.MyTaskmxAdapter2;
@@ -65,6 +68,8 @@ import com.cn.wti.util.app.dialog.DateTimePickDialogUtil;
 import com.cn.wti.util.app.qx.BussinessUtils;
 import com.cn.wti.util.db.HttpClientUtils;
 import com.cn.wti.util.db.ReflectHelper;
+import com.cn.wti.util.net.Net;
+import com.cn.wti.util.number.FileUtils;
 import com.cn.wti.util.number.SizheTool;
 import com.cn.wti.util.other.DateUtil;
 import com.cn.wti.util.app.dialog.WeiboDialogUtils;
@@ -84,6 +89,8 @@ import com.dina.ui.model.IListItem;
 import com.dina.ui.widget.UITableMxView;
 import com.dina.ui.widget.UITableView;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +99,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -109,6 +120,13 @@ public class ActivityController {
     public static Dialog mDialog;
     private static Context mContext1;
     public  static List<Activity> activities = new ArrayList<Activity>();
+    public static Map<String,Object> uploadMap = new HashMap<>();
+
+    static {
+        uploadMap.put("filename","filename");
+        uploadMap.put("filepath","newfilename");
+        uploadMap.put("fileid","id");
+    }
 
     public static void addActivity(Activity activity){
         activities.add(activity);
@@ -4075,6 +4093,86 @@ public class ActivityController {
             }
         }
         return  map;
+    }
+
+    public static void uploadFile(final Context context, final Map<String,Object> resMap) {
+        try {
+            Net.UPLOAD_URL = AppUtils.app_address+"/menu/uploadFileToQiniu";
+            File file = new File(resMap.get("filePath").toString());
+            byte[] buffer = FileUtils.File2Bytes(file);
+            Activity sevice = null;
+            if (context != null){
+                sevice  = (Activity) context;
+            }
+            final Activity finalSevice = sevice;
+            Net.upload(Net.UPLOAD_URL, file.getName(), buffer, FastJsonUtils.mapTOmapStr(resMap), new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Toast.makeText(mContext1, "fail", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    final String responseStr = response.body().string();
+                    try {
+                        if(200 <= response.code() && response.code() <= 299){
+                            final JSONObject json = JSONObject.parseObject(responseStr);
+                            if(json.getString("status").equals("ok")){
+                                Map<String,Object> tempMap = FastJsonUtils.strToMap(json.toJSONString());
+                                ReflectHelper.callMethod2(finalSevice,"uploadSuccess",new Object[]{tempMap},Map.class);
+                            }else{
+                                Log.d(getClass().getName(), context.getString(R.string.upload_fail));
+                            }
+                        }else{
+                            Log.d(getClass().getName(), context.getString(R.string.upload_fail));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    Log.d(getClass().getName(), responseStr);
+                }
+            });
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 查看文件
+     * @param context
+     * @param map
+     */
+    public static void showFile(Context context,Map<String,Object> map){
+        Context mContext = context;
+        Object filePath = map.get("filePath") == null ? map.get("newfilename") : map.get("filePath");
+        String fileTemp = filePath == null ? "" : filePath.toString();
+        if (map.get("fileName").toString().indexOf("pdf") != -1){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);
+            intent.setDataAndType(uri, "application/pdf");
+            ((Activity)mContext).startActivity(intent);
+        }else{
+            Intent intent = new Intent(mContext,FilePreviewActivity.class);
+            Map<String,Object> parmsMap = new HashMap<String, Object>();
+            parmsMap.put("title","文件预览");
+            parmsMap.put("fileName",map.get("fileName"));
+            parmsMap.put("filePath",filePath == null ? "" : filePath);
+            intent.putExtras(AppUtils.setParms("",parmsMap));
+            ((Activity)mContext).startActivity(intent);
+        }
+    }
+
+    /**
+     * 启动附件活动
+     * @param context
+     * @param map
+     */
+    public static void startMyFileActivity(Context context,Map<String,Object> map){
+        Context mContext = context;
+        Intent intent = new Intent(mContext,MyFileActivity.class);
+        intent.putExtras(AppUtils.setParms("",map));
+        ((Activity)mContext).startActivity(intent);
     }
 
     @RequiresApi(api = 29)

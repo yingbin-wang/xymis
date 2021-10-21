@@ -113,7 +113,7 @@ public class Fragment3 extends Fragment {
 				/*case R.id.ribao:
 
 					if (ActivityController.checkQx("SellDaily")){
-						intent.setClass(getContext(), SalesdailyActivity.class);
+						intent.setClass(getContext(), MyFileActivity.class);
 						startActivity(intent);
 					}else{
 						Toast.makeText(getActivity(),getString(R.string.error_invalid_user),Toast.LENGTH_SHORT).show();

@@ -109,7 +109,12 @@
 
         <activity
             android:name="com.cn.wti.activity.web.FilePreviewActivity" android:screenOrientation="portrait"
-            android:theme="@style/MyTheme.title"/>
+            android:theme="@android:style/Theme.NoTitleBar"/>
+
+        <!--我的附件-->
+        <activity
+            android:name="com.cn.wti.activity.rwgl.myfile.MyFileActivity" android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"/>
 
         <activity
             android:name="com.cn.wti.activity.LoginActivity" android:screenOrientation="portrait"
