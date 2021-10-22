@@ -4148,11 +4148,11 @@ public class ActivityController {
         Object filePath = map.get("filePath") == null ? map.get("newfilename") : map.get("filePath");
         String fileTemp = filePath == null ? "" : filePath.toString();
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);
+
         String type ="",fileName = map.get("fileName").toString();
 
-        if (fileName.indexOf("pdf") != -1 || fileName.indexOf("doc") != -1 || fileName.indexOf("docx") != -1 || fileName.indexOf("xls") != -1 || fileName.indexOf("xlsx") != -1
-            || fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1){
+        if (fileName.indexOf("pdf") != -1/* || fileName.indexOf("doc") != -1 || fileName.indexOf("docx") != -1 || fileName.indexOf("xls") != -1 || fileName.indexOf("xlsx") != -1
+            || fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1*/){
             if (fileName.indexOf("pdf") != -1){
                 type = Constant.PDF;
             }else if (fileName.indexOf("doc") != -1){
@@ -4167,7 +4167,16 @@ public class ActivityController {
                 type = Constant.IMAGE;
             }
 
-            intent.setDataAndType(uri, type);
+            /*Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);*/
+            String url = "";
+            if (AppUtils.isIp(AppUtils.app_address)){
+                url = "http://"+AppUtils.app_address+":8080/menu/previewFile?fileName="+fileName+"&filePath="+"http://"+AppUtils.file_address+"/"+fileTemp;
+            }else{
+                url = "http://"+AppUtils.app_address+"/menu/previewFile?fileName="+fileName+"&filePath="+"http://"+AppUtils.file_address+"/"+fileTemp;
+            }
+            Uri uri = Uri.parse(url);
+            /*intent.setDataAndType(uri, type);*/
+            intent.setData(uri);
             ((Activity)mContext).startActivity(intent);
         }else{
             intent = new Intent(mContext,FilePreviewActivity.class);

@@ -112,6 +112,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
         id = parmsMap.get("id").toString();
         code = parmsMap.get("code").toString();
         menu_name="附件";
+        main_data.putAll(parmsMap);
 
         pars = new ListParms(menu_code,"id:"+id+",code:"+code+",name:"+menu_code).getParms();
         Object res = ActivityController.getData2ByPost(mContext,"menu","findClUploadFilesByIdAndName", StringUtils.strTOJsonstr(pars));
@@ -293,7 +294,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (resultCode == request_code_file){
+        if (requestCode == request_code_file){
             //执行上传动作
             resMap.put("field","");
             resMap.put("code",main_data.get("code"));
@@ -305,6 +306,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
             }
             resMap.put("id",tempId);
             resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
+            resMap.put("menucode",main_data.get("menucode"));
             ActivityController.uploadFile(mContext,resMap);
         }
     }
@@ -314,7 +316,13 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
      * @param map
      */
     public void uploadSuccess(Map<String,Object> map){
-        Toast.makeText(mContext,mContext.getString(R.string.upload_succeed),Toast.LENGTH_SHORT).show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(mContext,mContext.getString(R.string.upload_succeed),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         if (map.get("fileDetail") != null){
             Map<String,Object> tempMap = ActivityController.uploadMap;
             JSONArray jsonArray = (JSONArray) map.get("fileDetail");
@@ -325,6 +333,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                 fileList.add(m2);
             }
         }
+
     }
 
 }
