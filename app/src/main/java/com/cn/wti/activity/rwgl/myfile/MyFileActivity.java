@@ -154,7 +154,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
         switch (v.getId()){
             case R.id.openFile:
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/pdf|image/*");
+                intent.setType("application/doc|image/*");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     intent.putExtra(Intent.EXTRA_MIME_TYPES,
                             new String[]{Constant.IMAGE,Constant.PDF});
@@ -244,7 +244,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                                 map.put("newfilename",data_map.get("newfilename").toString());
                                 map.put("id",data_map.get("id").toString());
                                 try {
-                                    Net.post("menu/deletefileFromQiniu", map, new Callback() {
+                                    Net.post("menu/deletefile", map, new Callback() {
                                         @Override
                                         public void onFailure(Call call, IOException e) {
                                             runOnUiThread(new Runnable() {
@@ -262,11 +262,11 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                                                 @Override
                                                 public void run() {
                                                     Toast.makeText(mContext,mContext.getString(R.string.success_operation),Toast.LENGTH_SHORT);
+                                                    fileList.remove(finalIndex);
+                                                    mAdapter1.notifyDataSetChanged();
                                                 }
                                             });
 
-                                            fileList.remove(finalIndex);
-                                            mAdapter1.notifyDataSetChanged();
                                         }
                                     });
                                 } catch (IOException e) {
@@ -282,6 +282,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                         index = (int) v.getTag();
                         data_map = datas.get(index);
                         Map<String,Object> map = new HashMap<>();
+                        map.put("menucode",menu_code);
                         map.put("fileName",data_map.get("filename"));
                         map.put("filePath",data_map.get("newfilename") == null ? "" :data_map.get("newfilename") );
                         ActivityController.showFile(mContext,map);
@@ -304,10 +305,13 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
             }else{
                 tempId = main_data.get("id").toString();
             }
-            resMap.put("id",tempId);
-            resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
-            resMap.put("menucode",main_data.get("menucode"));
-            ActivityController.uploadFile(mContext,resMap);
+            if (intent.getData() != null){
+                resMap.put("id",tempId);
+                resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
+                resMap.put("menucode",main_data.get("menucode"));
+                resMap.put("name",main_data.get("menucode"));
+                ActivityController.uploadFile(mContext,resMap);
+            }
         }
     }
 
@@ -331,6 +335,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                 FastJsonUtils.mapTOmapByParams(main_data,m2,tempMap);
                 fileName.setText(m2.get("filename").toString());
                 fileList.add(m2);
+                mAdapter1.notifyDataSetChanged();
             }
         }
 

@@ -66,9 +66,10 @@ public class FilePreviewActivity extends Activity {
 
         String url = "";
         if (AppUtils.isIp(AppUtils.app_address)){
-            url = "http://"+AppUtils.app_address+":8080/menu/previewFile?fileName="+parmsMap.get("fileName").toString()+"&filePath="+"http://"+AppUtils.file_address+"/"+parmsMap.get("filePath");
+            url = "http://"+AppUtils.app_address+":8080/menu/previewFile?fileName="+parmsMap.get("fileName")+"&filePath="+"http://"+AppUtils.file_address+"/"+parmsMap.get("filePath");
         }else{
-            url = "http://"+AppUtils.app_address+"/menu/previewFile?fileName="+parmsMap.get("fileName").toString()+"&filePath="+"http://"+AppUtils.file_address+"/"+parmsMap.get("filePath");
+            url = "http://"+AppUtils.app_address+"/menu/previewFile?fileName="+parmsMap.get("fileName")+"&v_="+AppUtils.user.get_version()+
+                    "&filePath="+"http://"+AppUtils.app_address+"/menu/previewFile2?newfilename="+parmsMap.get("filePath")+"A7654321name="+parmsMap.get("menucode")+"A7654321v_="+AppUtils.user.get_version();
         }
         wv.clearCache(true);
         wv.loadUrl(url);

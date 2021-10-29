@@ -4097,7 +4097,7 @@ public class ActivityController {
 
     public static void uploadFile(final Context context, final Map<String,Object> resMap) {
         try {
-            Net.UPLOAD_URL = AppUtils.app_address+"/menu/uploadFileToQiniu";
+            Net.UPLOAD_URL = AppUtils.app_address+"/menu/uploadApk";
             File file = new File(resMap.get("filePath").toString());
             byte[] buffer = FileUtils.File2Bytes(file);
             Activity sevice = null;
@@ -4139,7 +4139,7 @@ public class ActivityController {
     }
 
     /**
-     * 查看文件
+     * 查看文件 || fileName.indexOf("doc") != -1 || fileName.indexOf("docx") != -1 || fileName.indexOf("xls") != -1 || fileName.indexOf("xlsx") != -1 || fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1
      * @param context
      * @param map
      */
@@ -4147,12 +4147,11 @@ public class ActivityController {
         Context mContext = context;
         Object filePath = map.get("filePath") == null ? map.get("newfilename") : map.get("filePath");
         String fileTemp = filePath == null ? "" : filePath.toString();
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        //Intent intent = new Intent(Intent.ACTION_VIEW);
 
         String type ="",fileName = map.get("fileName").toString();
 
-        if (fileName.indexOf("pdf") != -1/* || fileName.indexOf("doc") != -1 || fileName.indexOf("docx") != -1 || fileName.indexOf("xls") != -1 || fileName.indexOf("xlsx") != -1
-            || fileName.indexOf("png") != -1 || fileName.indexOf("jpg") != -1 || fileName.indexOf("jpeg") != -1 ||  fileName.indexOf("gif") != -1*/){
+        /*if (fileName.indexOf("pdf") != -1){
             if (fileName.indexOf("pdf") != -1){
                 type = Constant.PDF;
             }else if (fileName.indexOf("doc") != -1){
@@ -4167,15 +4166,16 @@ public class ActivityController {
                 type = Constant.IMAGE;
             }
 
-            /*Uri uri = Uri.parse("http://"+AppUtils.file_address+"/"+fileTemp);*/
             String url = "";
             if (AppUtils.isIp(AppUtils.app_address)){
                 url = "http://"+AppUtils.app_address+":8080/menu/previewFile?fileName="+fileName+"&filePath="+"http://"+AppUtils.file_address+"/"+fileTemp;
             }else{
-                url = "http://"+AppUtils.app_address+"/menu/previewFile?fileName="+fileName+"&filePath="+"http://"+AppUtils.file_address+"/"+fileTemp;
+                url = "http://"+AppUtils.app_address+"/menu/previewFile?fileName="+fileName+"&v_="+AppUtils.user.get_version()+
+                        "&filePath="+"http://"+AppUtils.app_address+"/menu/previewFile2?newfilename="+fileTemp+"A7654321name="+map.get("menucode")+"A7654321v_="+AppUtils.user.get_version();
             }
+
+
             Uri uri = Uri.parse(url);
-            /*intent.setDataAndType(uri, type);*/
             intent.setData(uri);
             ((Activity)mContext).startActivity(intent);
         }else{
@@ -4186,7 +4186,7 @@ public class ActivityController {
             parmsMap.put("filePath",filePath == null ? "" : filePath);
             intent.putExtras(AppUtils.setParms("",parmsMap));
             ((Activity)mContext).startActivity(intent);
-        }
+        }*/
 
         /*if (map.get("fileName").toString().indexOf("pdf") != -1){
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -4202,6 +4202,14 @@ public class ActivityController {
             intent.putExtras(AppUtils.setParms("",parmsMap));
             ((Activity)mContext).startActivity(intent);
         }*/
+        Intent intent = new Intent(mContext,FilePreviewActivity.class);
+        Map<String,Object> parmsMap = new HashMap<String, Object>();
+        parmsMap.put("title","文件预览");
+        parmsMap.put("fileName",map.get("fileName"));
+        parmsMap.put("filePath",filePath == null ? "" : filePath);
+        parmsMap.put("menucode",map.get("menucode"));
+        intent.putExtras(AppUtils.setParms("",parmsMap));
+        ((Activity)mContext).startActivity(intent);
     }
 
     /**
