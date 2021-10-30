@@ -3,9 +3,12 @@ package com.cn.wti.activity.rwgl.myfile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -36,6 +39,7 @@ import com.cn.wti.util.app.ActivityController;
 import com.cn.wti.util.app.AppUtils;
 import com.cn.wti.util.app.RecyclerViewUtils;
 import com.cn.wti.util.app.dialog.DatePickDialogUtil;
+import com.cn.wti.util.app.qx.QxUtils;
 import com.cn.wti.util.db.FastJsonUtils;
 import com.cn.wti.util.file.FileUtil;
 import com.cn.wti.util.net.Net;
@@ -153,19 +157,26 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
         Object res;
         switch (v.getId()){
             case R.id.openFile:
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/doc|image/*");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    intent.putExtra(Intent.EXTRA_MIME_TYPES,
-                            new String[]{Constant.IMAGE,Constant.PDF});
-                }
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                if (QxUtils.getInstance(MyFileActivity.this).lacksPermissions(mContext)){//读写权限没开启
+                    ActivityCompat.requestPermissions(this,QxUtils.getInstance(MyFileActivity.this).permissions,0);
+                }else {
+                    //读写权限已开启 是打开相机还是选择文件
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("application/doc|image/*");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                                new String[]{Constant.IMAGE,Constant.PDF});
+                    }
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-                try {
-                    startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
+                    try {
+                        startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
                 break;
             default:
                 break;
@@ -305,7 +316,7 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
             }else{
                 tempId = main_data.get("id").toString();
             }
-            if (intent.getData() != null){
+            if (intent != null && intent.getData() != null){
                 resMap.put("id",tempId);
                 resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
                 resMap.put("menucode",main_data.get("menucode"));
@@ -338,7 +349,29 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                 mAdapter1.notifyDataSetChanged();
             }
         }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==0){
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i]!=-1){
+                    //T.showShort(mContext,"权限设置成功");
+                }else {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    startActivity(intent);
+                    break;
+                }
+            }
+
+        }
     }
 
 }

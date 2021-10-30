@@ -3,6 +3,7 @@ package com.cn.wti.util.app.qx;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
@@ -54,5 +55,37 @@ public class QxUtils {
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
+    }
+
+
+    /**
+     * 读写权限 自己可以添加需要判断的权限
+     */
+    public String[]permissions={
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE };
+
+
+    /**
+     * 判断权限集合
+     * permissions 权限数组
+     * return true-表示没有改权限 false-表示权限已开启
+     */
+    public boolean lacksPermissions(Context mContexts) {
+        for (String permission : permissions) {
+            if (lacksPermission(mContexts,permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否缺少权限
+     */
+    private boolean lacksPermission(Context mContexts, String permission) {
+        return ContextCompat.checkSelfPermission(mContexts, permission) ==
+                PackageManager.PERMISSION_DENIED;
     }
 }

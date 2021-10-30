@@ -53,16 +53,15 @@ public class FilePreviewActivity extends Activity {
         wv = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        //支持屏幕缩放
-        webSettings.setSupportZoom(true);
-        webSettings.setBuiltInZoomControls(true);
-        //不显示webview缩放按钮
-        webSettings.setDisplayZoomControls(false);
-        webSettings.setUseWideViewPort(true);//让webview读取网页设置的viewport，pc版网页
-
+        webSettings.setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
         //自适应屏幕
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
+        //自动缩放
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        //支持获取手势焦点
+        wv.requestFocusFromTouch();
 
         String url = "";
         if (AppUtils.isIp(AppUtils.app_address)){
