@@ -62,7 +62,6 @@ public class QxUtils {
      * 读写权限 自己可以添加需要判断的权限
      */
     public String[]permissions={
-            Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
 

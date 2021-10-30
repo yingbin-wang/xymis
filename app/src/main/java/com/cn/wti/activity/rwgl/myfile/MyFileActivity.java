@@ -161,6 +161,8 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                     ActivityCompat.requestPermissions(this,QxUtils.getInstance(MyFileActivity.this).permissions,0);
                 }else {
                     //读写权限已开启 是打开相机还是选择文件
+
+
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("application/doc|image/*");
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -367,7 +369,6 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     startActivity(intent);
-                    break;
                 }
             }
 
