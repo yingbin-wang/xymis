@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.support.v4.view.MenuItemCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.ObjectArrayCodec;
+import com.cn.wti.activity.common.BadgeActionProvider;
 import com.cn.wti.entity.System_one;
 import com.cn.wti.entity.adapter.handler.MyHandler;
 import com.cn.wti.entity.parms.ListParms;
@@ -44,6 +49,7 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
     private ActionBar actionBar;
     protected String[] contents;
     protected Map<String,Object> qxMap;
+    protected BadgeActionProvider mActionProvider;
 
 
     @Override
@@ -625,10 +631,14 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
     }
 
     public Menu checkQx(Menu menu){
+        /*getMenuInflater().inflate(R.menu.menu_auditall, menu);
+        MenuItem menuItem = menu.findItem(R.id.upload);
+        mActionProvider = (BadgeActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        mActionProvider.setBadge(6);*/
         if (qxMap != null){
-            /*if(qxMap.get("addQx") != null && qxMap.get("addQx").toString().equals("true")){
+            if(qxMap.get("addQx") != null && qxMap.get("addQx").toString().equals("true")){
                 menu.addSubMenu(0,R.id.add,1,"新增");
-            }*/
+            }
             if (qxMap.get("modQx")!= null && qxMap.get("modQx").toString().equals("true")){
                 menu.addSubMenu(0,R.id.save,2,"保存");
             }

@@ -31,5 +31,6 @@
         android:id="@+id/upload"
         android:icon="@mipmap/documentmore"
         app:showAsAction="always"
+        app:actionProviderClass="com.cn.wti.activity.common.BadgeActionProvider"
         android:title="附件"/>
 </menu>
