@@ -471,4 +471,11 @@ public class DateUtil {
 		return  val;
 	}
 
+	public  static String getNowStamp(){
+		SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		//获取当前时间并作为时间戳
+		String timeStamp=simpleDateFormat.format(new Date());
+		return  timeStamp;
+	}
+
 }

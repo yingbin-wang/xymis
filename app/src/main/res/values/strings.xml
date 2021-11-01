@@ -170,4 +170,9 @@
     <string name="login_btn1">同意</string>
     <string name="login_btn2">拒绝</string>
 
+    <string name="dialog_photo_title">拍照</string>
+    <string name="dialog_photo_title2">从文件管理器选择</string>
+    <string name="dialog_photo_title3">取消</string>
+    <string name="delete_comment">删除</string>
+
 </resources>

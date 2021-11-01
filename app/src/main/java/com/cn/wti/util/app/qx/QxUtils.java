@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 /**
@@ -62,6 +63,7 @@ public class QxUtils {
      * 读写权限 自己可以添加需要判断的权限
      */
     public String[]permissions={
+            Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
@@ -86,5 +88,26 @@ public class QxUtils {
     private boolean lacksPermission(Context mContexts, String permission) {
         return ContextCompat.checkSelfPermission(mContexts, permission) ==
                 PackageManager.PERMISSION_DENIED;
+    }
+
+    public boolean cameraIsCanUse() {
+        boolean isCanUse = true;
+        Camera mCamera = null;
+        try {
+            mCamera = Camera.open();
+            Camera.Parameters mParameters = mCamera.getParameters(); //针对魅族手机
+            mCamera.setParameters(mParameters);
+        } catch (Exception e) {
+            isCanUse = false;
+        }
+        if (mCamera != null) {
+            try {
+                mCamera.release();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return isCanUse;
+            }
+        }
+        return isCanUse;
     }
 }

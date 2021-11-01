@@ -57,6 +57,10 @@
     <!-- 3.2.0版本增加-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <!--华为绘制角标-->
     <uses-permission  android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
@@ -439,6 +443,15 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.wticn.wyb.wtiapp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
 
         <!-- Required SDK 核心功能-->

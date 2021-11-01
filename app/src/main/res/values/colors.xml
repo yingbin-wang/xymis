@@ -30,7 +30,29 @@
     <color name="text_color_pressed">#ffffff</color>
 
     <color name="gray">#aaaaaa</color>
+    <color name="gray_1">#FF999999</color>
+    <color name="gray_2">#FFEEEEEE</color>
+    <color name="gray_3">#FFDDDDDD</color>
+    <color name="gray_4">#EEEEEEFF</color>
+    <color name="gray_5">#FFC3C3C3</color>
+    <color name="gray_6">#FFF8F8F8</color>
+    <color name="gray_7">#D1F8F8F8</color>
+    <color name="gray_8">#0D000050</color>
+    <color name="gray_9">#6604040F</color>
+    <color name="gray_10">#1A999999</color>
+    <color name="gray_11">#0D000050</color>
+    <color name="gray_12">#FFCCCCCC</color>
+    <color name="gray_13">#FFF6F6F6</color>
+    <color name="gray_14">#FF8F8F8F</color>
+    <color name="gray_15">#FF999999</color>
+    <color name="gray_16">#fff8f8f8</color>
+    <color name="gray_17">#FF8E8E93</color>
+    <color name="gray_18">#1a04040f</color>
+    <color name="gray_19">#fff6f6f6</color>
+    <color name="gray_20">#CCCCCC</color>
+
     <color name="light_blue">#3980ca</color>
+    <color name="blue_2">#FF007AFF</color>
 
     <color name="keyguard_text_color_normal">#ffffff</color>
     <color name="keyguard_text_color_unlock">#a7d84c</color>

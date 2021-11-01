@@ -1,14 +1,19 @@
 package com.cn.wti.activity.rwgl.myfile;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -29,6 +34,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.cn.wti.activity.base.BaseEdit_NoTable_Activity;
+import com.cn.wti.activity.dialog.FileSelectDialog;
 import com.cn.wti.activity.rwgl.saledaily.Salesdaily_editActivity;
 import com.cn.wti.entity.System_one;
 import com.cn.wti.entity.parms.ListParms;
@@ -38,11 +44,13 @@ import com.cn.wti.util.Constant;
 import com.cn.wti.util.app.ActivityController;
 import com.cn.wti.util.app.AppUtils;
 import com.cn.wti.util.app.RecyclerViewUtils;
+import com.cn.wti.util.app.ToastUtils;
 import com.cn.wti.util.app.dialog.DatePickDialogUtil;
 import com.cn.wti.util.app.qx.QxUtils;
 import com.cn.wti.util.db.FastJsonUtils;
 import com.cn.wti.util.file.FileUtil;
 import com.cn.wti.util.net.Net;
+import com.cn.wti.util.number.FileUtils;
 import com.cn.wti.util.number.IniUtils;
 import com.cn.wti.util.other.DateUtil;
 import com.cn.wti.util.other.StringUtils;
@@ -52,6 +60,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.wticn.wyb.wtiapp.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,9 +85,10 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
     private TextView_custom fileName;
     private ImageView openFile;
     RelativeLayout main_form;
-
-    private String id,code;
+    private FileSelectDialog fileSelectDialog;
+    private String id,code,fileName1="";
     private int request_code_file = 100981;
+    private int CAMERA_RESULT_CODE = 1004,CROP_RESULT_CODE=1005;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,29 +171,170 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                     ActivityCompat.requestPermissions(this,QxUtils.getInstance(MyFileActivity.this).permissions,0);
                 }else {
                     //读写权限已开启 是打开相机还是选择文件
-
-
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("application/doc|image/*");
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        intent.putExtra(Intent.EXTRA_MIME_TYPES,
-                                new String[]{Constant.IMAGE,Constant.PDF});
-                    }
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-                    try {
-                        startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
-                    }
+                    showLoginDialog();
                 }
-
-
                 break;
             default:
                 break;
         }
         super.onClick(v);
+    }
+
+    public void showLoginDialog() {
+        fileSelectDialog = new FileSelectDialog(null, new FileSelectDialog.DialogClick() {
+
+            @Override
+            public void photographClick() {
+                if (QxUtils.getInstance(MyFileActivity.this).cameraIsCanUse()) {
+                    openSysCamera();
+                } else {
+                    ToastUtils.showToast(mContext,"您未打开相机权限");
+                }
+            }
+
+            @Override
+            public void selectCLick() {
+                openSelectFile();
+            }
+
+            @Override
+            public void deleteItem() {
+                closeDialog();
+            }
+        });
+
+        fileSelectDialog.show(getFragmentManager(), "fileSelectDialog");
+    }
+
+    /**
+     * 打开系统相机
+     */
+    private void openSysCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileName.setText(DateUtil.getNowStamp()+".png");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            cameraIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(this, "com.wticn.wyb.wtiapp.fileprovider", new File(Environment.getExternalStorageDirectory(), fileName.getText().toString()));
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+        } else {
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(
+                    new File(Environment.getExternalStorageDirectory(), fileName.getText().toString())));
+        }
+
+        startActivityForResult(cameraIntent, CAMERA_RESULT_CODE);
+    }
+
+    private void openSelectFile(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/doc|image/*");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                    new String[]{Constant.IMAGE,Constant.PDF});
+        }
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            startActivityForResult( Intent.createChooser(intent, "请选择要上传的文件"), request_code_file);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "Please install a File Manager.",  Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        File tempFile = null;
+        if (requestCode == request_code_file){
+            //执行上传动作
+            resMap.put("field","");
+            resMap.put("code",main_data.get("code"));
+            String tempId = "";
+            if (main_data.get("id") == null || TextUtils.isEmpty(main_data.get("id").toString())){
+                tempId = IniUtils.getFixLenthString(5);
+            }else{
+                tempId = main_data.get("id").toString();
+            }
+            if (intent != null && intent.getData() != null){
+                resMap.put("id",tempId);
+                resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
+                resMap.put("menucode",main_data.get("menucode"));
+                resMap.put("name",main_data.get("menucode"));
+                ActivityController.uploadFile(mContext,resMap);
+            }
+        }else if (requestCode == CAMERA_RESULT_CODE && resultCode == RESULT_OK) {
+            tempFile = new File(Environment.getExternalStorageDirectory(), fileName.getText().toString());
+            if (tempFile != null) {
+                String cropName = fileName.getText().toString().replace(".png","crop.png");
+                File cropFile= FileUtils.bitmapCompress(getContentResolver(),FileUtil.getUriFromFile(mContext,tempFile),cropName);
+                resMap.put("field","");
+                resMap.put("code",main_data.get("code"));
+                String tempId = "";
+                if (main_data.get("id") == null || TextUtils.isEmpty(main_data.get("id").toString())){
+                    tempId = IniUtils.getFixLenthString(5);
+                }else{
+                    tempId = main_data.get("id").toString();
+                }
+                resMap.put("id",tempId);
+                resMap.put("filePath",cropFile.getAbsolutePath());
+                resMap.put("menucode",main_data.get("menucode"));
+                resMap.put("name",main_data.get("menucode"));
+                ActivityController.uploadFile(mContext,resMap);
+                deleteFile(cropName);
+            }
+        }
+
+        closeDialog();
+    }
+
+    public void closeDialog() {
+        if (fileSelectDialog != null) fileSelectDialog.dismiss();
+    }
+
+    /**
+     * 执行上传成功方法
+     * @param map
+     */
+    public void uploadSuccess(final Map<String,Object> map){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(mContext,mContext.getString(R.string.upload_succeed),Toast.LENGTH_SHORT).show();
+                if (map.get("fileDetail") != null){
+                    Map<String,Object> tempMap = ActivityController.uploadMap;
+                    JSONArray jsonArray = (JSONArray) map.get("fileDetail");
+                    if (jsonArray != null && jsonArray.size() == 1){
+                        Map<String,Object> m2 = FastJsonUtils.strToMap(jsonArray.get(0).toString());
+                        FastJsonUtils.mapTOmapByParams(main_data,m2,tempMap);
+                        fileName.setText(m2.get("filename").toString());
+                        fileList.add(m2);
+                        mAdapter1.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==0){
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i]!=-1){
+                    //T.showShort(mContext,"权限设置成功");
+                }else {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.setData(Uri.parse("package:" + getPackageName()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    startActivity(intent);
+                }
+            }
+        }
     }
 
     public class MyAdapter1 extends RecyclerView.Adapter<MyAdapter1.ViewHolder> {
@@ -303,75 +454,6 @@ public class MyFileActivity extends BaseEdit_NoTable_Activity{
                 }
 
             }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == request_code_file){
-            //执行上传动作
-            resMap.put("field","");
-            resMap.put("code",main_data.get("code"));
-            String tempId = "";
-            if (main_data.get("id") == null || TextUtils.isEmpty(main_data.get("id").toString())){
-                tempId = IniUtils.getFixLenthString(5);
-            }else{
-                tempId = main_data.get("id").toString();
-            }
-            if (intent != null && intent.getData() != null){
-                resMap.put("id",tempId);
-                resMap.put("filePath",FileUtil.getPath(mContext,intent.getData()));
-                resMap.put("menucode",main_data.get("menucode"));
-                resMap.put("name",main_data.get("menucode"));
-                ActivityController.uploadFile(mContext,resMap);
-            }
-        }
-    }
-
-    /**
-     * 执行上传成功方法
-     * @param map
-     */
-    public void uploadSuccess(Map<String,Object> map){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(mContext,mContext.getString(R.string.upload_succeed),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        if (map.get("fileDetail") != null){
-            Map<String,Object> tempMap = ActivityController.uploadMap;
-            JSONArray jsonArray = (JSONArray) map.get("fileDetail");
-            if (jsonArray != null && jsonArray.size() == 1){
-                Map<String,Object> m2 = FastJsonUtils.strToMap(jsonArray.get(0).toString());
-                FastJsonUtils.mapTOmapByParams(main_data,m2,tempMap);
-                fileName.setText(m2.get("filename").toString());
-                fileList.add(m2);
-                mAdapter1.notifyDataSetChanged();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==0){
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i]!=-1){
-                    //T.showShort(mContext,"权限设置成功");
-                }else {
-                    Intent intent = new Intent();
-                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    intent.setData(Uri.parse("package:" + getPackageName()));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                    startActivity(intent);
-                }
-            }
-
         }
     }
 
