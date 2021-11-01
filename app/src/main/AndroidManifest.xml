@@ -151,8 +151,7 @@
 
         <activity
             android:name="com.cn.wti.activity.myTask.MyTask_edit_Activity" android:screenOrientation="portrait"
-            android:logo="@mipmap/taskagents"
-            android:theme="@android:style/Theme.Holo.Light"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <activity

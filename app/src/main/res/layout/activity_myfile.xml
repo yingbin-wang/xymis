@@ -39,7 +39,8 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:background="@null"
-                    android:hint="请选择文件"/>
+                    android:hint="请选择文件"
+                    android:textColor="@color/blue_2"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

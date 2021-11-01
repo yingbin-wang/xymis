@@ -5,14 +5,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.cn.wti.activity.common.BadgeActionProvider;
 import com.cn.wti.entity.adapter.MyAdapter2;
 import com.cn.wti.entity.avalidations.EditTextValidator;
 import com.cn.wti.util.app.ActivityController;
@@ -46,11 +49,12 @@ public abstract class BaseEdit_ProcessActivity extends BaseEditActivity implemen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        actionBar = this.getActionBar();
+        /*actionBar = this.getActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setLogo(R.mipmap.navigationbar_back);
+        actionBar.setLogo(R.mipmap.navigationbar_back);*/
 
         mx1_View = (WebView) findViewById(R.id.mx1_webView);
         mx2_View = (WebView) findViewById(R.id.mx2_webView);
@@ -89,7 +93,7 @@ public abstract class BaseEdit_ProcessActivity extends BaseEditActivity implemen
         }).start();
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //判断 是否 是已办任务
         Intent intent = getIntent();
@@ -98,23 +102,16 @@ public abstract class BaseEdit_ProcessActivity extends BaseEditActivity implemen
             return  false;
         }
 
-        //添加子菜单
-        /*SubMenu sp = menu.addSubMenu("审批");*/
         menu.addSubMenu("通过");
         menu.addSubMenu("不通过");
         menu.addSubMenu("驳回");
         menu.addSubMenu("委托");
-        //为子菜单添加菜单项
-        /*sp.add(0, Menu.FIRST,0,"通过");
-        sp.add(0, Menu.FIRST+1, 0, "不通过");*/
+        menu.addSubMenu("附件");
         return super.onCreateOptionsMenu(menu);
 
-        /*MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_sp, menu);
-        return super.onCreateOptionsMenu(menu);*/
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         Intent intent = new Intent();
         switch (item.getItemId()){
@@ -125,14 +122,14 @@ public abstract class BaseEdit_ProcessActivity extends BaseEditActivity implemen
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
-    }
+    }*/
 
     public String initData(){return  "";}
     public void createView(){};
 
-    public void  addTitle(String title){
+    /*public void  addTitle(String title){
         actionBar.setTitle(title);
-    }
+    }*/
 
     public void createmx_TaskView(List<Map<String,Object>> _datalist, UITableMxView tableView, String[] contents) {
 

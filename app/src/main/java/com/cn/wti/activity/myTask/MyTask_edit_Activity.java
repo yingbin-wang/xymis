@@ -11,17 +11,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.cn.wti.activity.WebViewActivity;
 import com.cn.wti.activity.base.BaseEdit_ProcessActivity;
+import com.cn.wti.activity.dialog.PopWinShare;
 import com.cn.wti.entity.System_one;
 import com.cn.wti.entity.adapter.MyAdapter2;
 import com.cn.wti.entity.parms.ListParms;
 import com.cn.wti.entity.view.custom.dialog.window.SingleChoicePopWindow;
+import com.cn.wti.entity.view.custom.note.DisplayUtils;
 import com.cn.wti.util.app.dialog.WeiboDialogUtils;
 import com.cn.wti.util.db.HttpClientUtils;
 import com.wticn.wyb.wtiapp.R;
@@ -49,6 +55,9 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
     private Map<String,Object> gzMap,_selectMap = new HashMap<String, Object>();
     private RecyclerView historymx_View = null;
     private LinearLayout historymx;
+    private PopWinShare popWinShare = null;
+    private ImageButton title_back2,title_ok2 = null;
+    private TextView title_name2 = null;
 
     private Map<String,Object> auditUserMap= null,//当前用户审批信息
             processAttrMap;//流程属性
@@ -96,7 +105,65 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
             taskId = AppUtils.getMapVal(dataMap,"ID_").toString();
         }
 
+
         super.onCreate(savedInstanceState);
+
+        title_back2 = findViewById(R.id.title_back2);
+        title_ok2 = findViewById(R.id.title_ok2);
+        title_back2.setOnClickListener(new OnClickLintener());
+        title_ok2.setOnClickListener(new OnClickLintener());
+        title_ok2.setBackgroundResource(R.mipmap.documentmore);
+        title_name2 = findViewById(R.id.title_name2);
+    }
+
+    void showPopWindow(){
+        if (popWinShare == null) {
+            //自定义的单击事件
+            OnClickLintener paramOnClickListener = new OnClickLintener();
+            popWinShare = new PopWinShare(MyTask_edit_Activity.this, paramOnClickListener,260,400);
+            //监听窗口的焦点事件，点击窗口外面则取消显示
+            popWinShare.getContentView().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        popWinShare.dismiss();
+                    }
+                }
+            });
+        }
+        //设置默认获取焦点
+        popWinShare.setFocusable(true);
+        //以某个控件的x和y的偏移量位置开始显示窗口
+        popWinShare.showAsDropDown(title_ok2, 0, 0);
+        //如果窗口存在，则更新
+        popWinShare.update();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String pars = new ListParms(menu_code,"id:"+main_data.get("id")+",code:"+main_data.get("code")+",name:"+menu_code).getParms();
+                List<Map<String,Object>> res_array = null;
+                Object res = ActivityController.getData2ByPost(mContext,"menu","findClUploadFilesByIdAndName", StringUtils.strTOJsonstr(pars));
+                if (res != null && res instanceof JSONArray){
+                    res_array = (List<Map<String, Object>>) res;
+
+                }
+                final List<Map<String, Object>> finalRes_array = res_array;
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (finalRes_array.size() >0){
+                            popWinShare.setBadgeText(finalRes_array.size());
+                        }else{
+                            popWinShare.setBadgeText(0);
+                        }
+
+                    }
+                });
+            }
+        }).start();
+
     }
 
 
@@ -274,7 +341,8 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
     @Override
     public  void createView(){
 
-        addTitle(AppUtils.getMapVal(dataMap,"NAME_").toString());
+        //addTitle(AppUtils.getMapVal(dataMap,"NAME_").toString());
+        title_name2.setText(AppUtils.getMapVal(dataMap,"NAME_").toString());
         String mx_name = null;
         if (resMap.get("mxNames") != null){
             mx_name = resMap.get("mxNames").toString();
@@ -421,132 +489,6 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (tableView == null){
-            return  true;
-        }
-
-        if (tableView.getEditTextValidator() == null){
-            return  true;
-        }
-
-        int itemId = 0;
-        if (item.getTitle().equals("通过") || item.getTitle().equals("不通过")){
-            itemId = 1;
-        }else if(item.getTitle().equals("驳回")){
-            itemId = 2;
-        }else if(item.getTitle().equals("委托")){
-            itemId = 3;
-        }
-
-        if (itemId != 0){
-            //添加 表单验证
-            if(!tableView.getEditTextValidator().validate()){
-                return false;
-            }
-            //更新主数据
-            updateMain();
-        }
-
-        final Intent intent = new Intent();
-
-        switch (itemId) {
-
-            case 1:
-                intent.setClass(MyTask_edit_Activity.this,MyTask_ExamineActivity.class);
-                dataMap.put("formData",FastJsonUtils.mapToString(main_data));
-                dataMap.put("exportationActivity",exportationActivity_str);
-                dataMap.put("fqr",fqr);
-                dataMap.put("sftg",item.getTitle());
-                dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
-                dataMap.put("formAttr",FastJsonUtils.ListMapToListStr(formAttrList));
-                intent.putExtras(AppUtils.setParms("",dataMap));
-                startActivityForResult(intent,1);
-                break;
-
-            case 2:
-                intent.setClass(MyTask_edit_Activity.this,MyTask_BackActivity.class);
-                dataMap.put("formData",FastJsonUtils.mapToString(main_data));
-                dataMap.put("backActivity",FastJsonUtils.ListMapToListStr(backActivityList));
-                dataMap.put("fqr",fqr);
-                dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
-                dataMap.put("index",index);
-                intent.putExtras(AppUtils.setParms("",dataMap));
-                startActivityForResult(intent,2);
-                break;
-            case 3:
-                pars = new ListParms("0","0",AppUtils.limit,"psndoc","workstatus:1").getParms();
-                final String testpars = StringUtils.strTOJsonstr(pars);
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        res = ActivityController.getDataByPost(mContext,"psndoc","list",testpars);
-                        int recordcount=0,pageIndex=0;
-                        List<Map<String,Object>> result_list =null;
-
-                        try {
-                            if(!res.equals("")){
-                                resMap = getResMap(res.toString());
-                                if(resMap.get("results")!= null){
-                                    recordcount = Integer.parseInt(resMap.get("results").toString());
-                                    pageIndex = 1;
-                                    result_list = (List<Map<String, Object>>) resMap.get("rows");
-                                    String[] items = FastJsonUtils.ListMapToListStr(result_list,"name");
-                                    List<String> list = FastJsonUtils.MapToListByKey(result_list,"name");
-
-                                    final int finalRecordcount = recordcount;
-                                    final List<Map<String, Object>> finalResult_list = result_list;
-                                    final int finalPageIndex = pageIndex;
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            final SingleChoicePopWindow mSingleChoicePopWindow = new SingleChoicePopWindow(MyTask_edit_Activity.this, main_form, finalResult_list,"psndoc","list",
-                                                    pars,"name", finalRecordcount, finalPageIndex,"");
-                                            mSingleChoicePopWindow.setOnOKButtonListener(new View.OnClickListener() {
-
-                                                @Override
-                                                public void onClick(View v) {
-                                                    Map<String, Object> dataMap = (Map<String, Object>) mSingleChoicePopWindow.getSelectObject();
-                                                    String val = dataMap.get("user_name").toString();
-                                                    pars = "taskId:"+taskId+",assignee:"+val;
-                                                    final String testpars = StringUtils.strTOJsonstr(pars);
-                                                    mDialog = WeiboDialogUtils.createLoadingDialog(mContext,"委托中...");
-                                                    new Thread(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            boolean flag = ActivityController.execute(MyTask_edit_Activity.this,"process","transferTask",testpars);
-                                                            if (flag){
-                                                                Intent intent = new Intent();
-                                                                intent.putExtra("index",index);
-                                                                setResult(2,intent);
-                                                                MyTask_edit_Activity.this.finish();
-                                                            }
-                                                            WeiboDialogUtils.closeDialog(mDialog);
-                                                        }
-                                                    }).start();
-
-                                                }
-                                            });
-                                            mSingleChoicePopWindow.show(true);
-                                        }
-                                    });
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
     public Map<String,Object> getResMap(String res){
         resMap = FastJsonUtils.strToMap(res.toString());
         if(resMap.get("state")!= null && resMap.get("state").toString().equals("success")){
@@ -652,5 +594,290 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
         mx4_View.destroy();
         mx5_View.destroy();
     }
+
+    class OnClickLintener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            int itemId = 0;
+            String title = "";
+            switch (v.getId()) {
+                case R.id.layout_pass:
+                    itemId = 1;
+                    title = "通过";
+                    break;
+                case R.id.layout_nopass:
+                    itemId = 1;
+                    title = "不通过";
+                    break;
+                case R.id.layout_weituo:
+                    itemId = 3;
+                    title = "委托";
+                    break;
+                case R.id.layout_bohui:
+                    itemId = 2;
+                    title = "驳回";
+                    break;
+                case R.id.layout_fujian:
+                    itemId = 4;
+                    title = "附件";
+                    break;
+                case R.id.title_ok2:
+                    showPopWindow();
+                    break;
+                case R.id.title_back2:
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+
+            if (itemId != 0){
+                //添加 表单验证
+                if(!tableView.getEditTextValidator().validate()){
+                    return;
+                }
+                //更新主数据
+                updateMain();
+                if (popWinShare != null){
+                    popWinShare.dismiss();
+                }
+            }
+
+            final Intent intent = new Intent();
+            switch (itemId) {
+
+                case 1:
+                    intent.setClass(MyTask_edit_Activity.this,MyTask_ExamineActivity.class);
+                    dataMap.put("formData",FastJsonUtils.mapToString(main_data));
+                    dataMap.put("exportationActivity",exportationActivity_str);
+                    dataMap.put("fqr",fqr);
+                    dataMap.put("sftg",title);
+                    dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
+                    dataMap.put("formAttr",FastJsonUtils.ListMapToListStr(formAttrList));
+                    intent.putExtras(AppUtils.setParms("",dataMap));
+                    startActivityForResult(intent,1);
+                    break;
+
+                case 2:
+                    intent.setClass(MyTask_edit_Activity.this,MyTask_BackActivity.class);
+                    dataMap.put("formData",FastJsonUtils.mapToString(main_data));
+                    dataMap.put("backActivity",FastJsonUtils.ListMapToListStr(backActivityList));
+                    dataMap.put("fqr",fqr);
+                    dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
+                    dataMap.put("index",index);
+                    intent.putExtras(AppUtils.setParms("",dataMap));
+                    startActivityForResult(intent,2);
+                    break;
+                case 3:
+                    pars = new ListParms("0","0",AppUtils.limit,"psndoc","workstatus:1").getParms();
+                    final String testpars = StringUtils.strTOJsonstr(pars);
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            res = ActivityController.getDataByPost(mContext,"psndoc","list",testpars);
+                            int recordcount=0,pageIndex=0;
+                            List<Map<String,Object>> result_list =null;
+
+                            try {
+                                if(!res.equals("")){
+                                    resMap = getResMap(res.toString());
+                                    if(resMap.get("results")!= null){
+                                        recordcount = Integer.parseInt(resMap.get("results").toString());
+                                        pageIndex = 1;
+                                        result_list = (List<Map<String, Object>>) resMap.get("rows");
+                                        String[] items = FastJsonUtils.ListMapToListStr(result_list,"name");
+                                        List<String> list = FastJsonUtils.MapToListByKey(result_list,"name");
+
+                                        final int finalRecordcount = recordcount;
+                                        final List<Map<String, Object>> finalResult_list = result_list;
+                                        final int finalPageIndex = pageIndex;
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                final SingleChoicePopWindow mSingleChoicePopWindow = new SingleChoicePopWindow(MyTask_edit_Activity.this, main_form, finalResult_list,"psndoc","list",
+                                                        pars,"name", finalRecordcount, finalPageIndex,"");
+                                                mSingleChoicePopWindow.setOnOKButtonListener(new View.OnClickListener() {
+
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Map<String, Object> dataMap = (Map<String, Object>) mSingleChoicePopWindow.getSelectObject();
+                                                        String val = dataMap.get("user_name").toString();
+                                                        pars = "taskId:"+taskId+",assignee:"+val;
+                                                        final String testpars = StringUtils.strTOJsonstr(pars);
+                                                        mDialog = WeiboDialogUtils.createLoadingDialog(mContext,"委托中...");
+                                                        new Thread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                boolean flag = ActivityController.execute(MyTask_edit_Activity.this,"process","transferTask",testpars);
+                                                                if (flag){
+                                                                    Intent intent = new Intent();
+                                                                    intent.putExtra("index",index);
+                                                                    setResult(2,intent);
+                                                                    MyTask_edit_Activity.this.finish();
+                                                                }
+                                                                WeiboDialogUtils.closeDialog(mDialog);
+                                                            }
+                                                        }).start();
+
+                                                    }
+                                                });
+                                                mSingleChoicePopWindow.show(true);
+                                            }
+                                        });
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+                    break;
+                case 4:
+                    main_data.put("menucode",menu_code);
+                    ActivityController.startMyFileActivity(mContext,main_data);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    }
+
+
+    /*public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (tableView == null){
+            return  true;
+        }
+
+        if (tableView.getEditTextValidator() == null){
+            return  true;
+        }
+
+        int itemId = 0;
+        if (item.getTitle().equals("通过") || item.getTitle().equals("不通过")){
+            itemId = 1;
+        }else if(item.getTitle().equals("驳回")){
+            itemId = 2;
+        }else if(item.getTitle().equals("委托")){
+            itemId = 3;
+        }else if(item.getTitle().equals("附件")){
+            itemId = 4;
+        }
+
+        if (itemId != 0){
+            //添加 表单验证
+            if(!tableView.getEditTextValidator().validate()){
+                return false;
+            }
+            //更新主数据
+            updateMain();
+        }
+
+        final Intent intent = new Intent();
+
+        switch (itemId) {
+
+            case 1:
+                intent.setClass(MyTask_edit_Activity.this,MyTask_ExamineActivity.class);
+                dataMap.put("formData",FastJsonUtils.mapToString(main_data));
+                dataMap.put("exportationActivity",exportationActivity_str);
+                dataMap.put("fqr",fqr);
+                dataMap.put("sftg",item.getTitle());
+                dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
+                dataMap.put("formAttr",FastJsonUtils.ListMapToListStr(formAttrList));
+                intent.putExtras(AppUtils.setParms("",dataMap));
+                startActivityForResult(intent,1);
+                break;
+
+            case 2:
+                intent.setClass(MyTask_edit_Activity.this,MyTask_BackActivity.class);
+                dataMap.put("formData",FastJsonUtils.mapToString(main_data));
+                dataMap.put("backActivity",FastJsonUtils.ListMapToListStr(backActivityList));
+                dataMap.put("fqr",fqr);
+                dataMap.put("processAttr",FastJsonUtils.mapToString(processAttrMap));
+                dataMap.put("index",index);
+                intent.putExtras(AppUtils.setParms("",dataMap));
+                startActivityForResult(intent,2);
+                break;
+            case 3:
+                pars = new ListParms("0","0",AppUtils.limit,"psndoc","workstatus:1").getParms();
+                final String testpars = StringUtils.strTOJsonstr(pars);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        res = ActivityController.getDataByPost(mContext,"psndoc","list",testpars);
+                        int recordcount=0,pageIndex=0;
+                        List<Map<String,Object>> result_list =null;
+
+                        try {
+                            if(!res.equals("")){
+                                resMap = getResMap(res.toString());
+                                if(resMap.get("results")!= null){
+                                    recordcount = Integer.parseInt(resMap.get("results").toString());
+                                    pageIndex = 1;
+                                    result_list = (List<Map<String, Object>>) resMap.get("rows");
+                                    String[] items = FastJsonUtils.ListMapToListStr(result_list,"name");
+                                    List<String> list = FastJsonUtils.MapToListByKey(result_list,"name");
+
+                                    final int finalRecordcount = recordcount;
+                                    final List<Map<String, Object>> finalResult_list = result_list;
+                                    final int finalPageIndex = pageIndex;
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            final SingleChoicePopWindow mSingleChoicePopWindow = new SingleChoicePopWindow(MyTask_edit_Activity.this, main_form, finalResult_list,"psndoc","list",
+                                                    pars,"name", finalRecordcount, finalPageIndex,"");
+                                            mSingleChoicePopWindow.setOnOKButtonListener(new View.OnClickListener() {
+
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Map<String, Object> dataMap = (Map<String, Object>) mSingleChoicePopWindow.getSelectObject();
+                                                    String val = dataMap.get("user_name").toString();
+                                                    pars = "taskId:"+taskId+",assignee:"+val;
+                                                    final String testpars = StringUtils.strTOJsonstr(pars);
+                                                    mDialog = WeiboDialogUtils.createLoadingDialog(mContext,"委托中...");
+                                                    new Thread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            boolean flag = ActivityController.execute(MyTask_edit_Activity.this,"process","transferTask",testpars);
+                                                            if (flag){
+                                                                Intent intent = new Intent();
+                                                                intent.putExtra("index",index);
+                                                                setResult(2,intent);
+                                                                MyTask_edit_Activity.this.finish();
+                                                            }
+                                                            WeiboDialogUtils.closeDialog(mDialog);
+                                                        }
+                                                    }).start();
+
+                                                }
+                                            });
+                                            mSingleChoicePopWindow.show(true);
+                                        }
+                                    });
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
+                break;
+            case 4:
+                main_data.put("menucode",menu_code);
+                ActivityController.startMyFileActivity(mContext,main_data);
+                break;
+            default:
+                break;
+        }
+        return true;
+    }*/
 
 }

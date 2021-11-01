@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/sp"
+        android:id="@+id/tg"
         android:icon="@mipmap/documentmore"
         app:showAsAction="always"
-        android:title="审批"/>
+        android:title="通过"/>
+    <item
+        android:id="@+id/btg"
+        android:icon="@mipmap/documentmore"
+        app:showAsAction="always"
+        android:title="不通过"/>
     <item
         android:id="@+id/bh"
         android:icon="@mipmap/documentmore"
@@ -16,5 +21,11 @@
         android:icon="@mipmap/documentmore"
         app:showAsAction="always"
         android:title="委托"/>
+
+    <item
+        android:id="@+id/upload"
+        android:icon="@mipmap/documentmore"
+        app:showAsAction="always"
+        android:title="附件"/>
 
 </menu>

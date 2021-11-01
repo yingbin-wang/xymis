@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
@@ -31,12 +33,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyApply_edit_Activity extends BaseEdit_ProcessActivity {
+public class MyApply_edit_Activity extends BaseEdit_ProcessActivity implements View.OnClickListener {
 
     private  String pars,id,taskId = "",serviceName;
     private Map<String,Object> resMap,dataMap,gzMap;
     private RecyclerView historymx_View = null;;
     private List<Map<String,Object>> historyCommentList = new ArrayList<Map<String,Object>>(); //历史信息
+
+    private ImageButton title_back2,title_ok2 = null;
+    private TextView title_name2 = null;
 
 
     @Override
@@ -44,6 +49,12 @@ public class MyApply_edit_Activity extends BaseEdit_ProcessActivity {
         layout = R.layout.common_edit_task;
         mContext = MyApply_edit_Activity.this;
         super.onCreate(savedInstanceState);
+
+        title_back2 = findViewById(R.id.title_back2);
+        title_ok2 = findViewById(R.id.title_ok2);
+        title_back2.setOnClickListener(this);
+        title_ok2.setVisibility(View.GONE);
+        title_name2 = findViewById(R.id.title_name2);
     }
 
     @Override
@@ -151,8 +162,8 @@ public class MyApply_edit_Activity extends BaseEdit_ProcessActivity {
 
     public  void createView(){
 
-        addTitle(AppUtils.getMapVal(dataMap,"NAME_").toString());
-
+        //addTitle(AppUtils.getMapVal(dataMap,"NAME_").toString());
+        title_name2.setText(AppUtils.getMapVal(dataMap,"NAME_").toString());
         String mx_name = null;
         if (resMap.get("mxNames") != null){
             mx_name = resMap.get("mxNames").toString();
@@ -242,6 +253,18 @@ public class MyApply_edit_Activity extends BaseEdit_ProcessActivity {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.title_back2:
+                finish();
+                break;
+             default:
+                 break;
         }
 
     }
