@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.wticn.wyb.wtiapp.R;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,8 +24,9 @@ public class PopWinCommonEdit extends PopupWindow{
     private View mainView;
     private LinearLayout layoutAdd, layoutSave, layoutDelete, layoutCheck, layoutUncheck, layoutFujian;
     private TextView badgeView = null;
+    private List<String> qxList = null;
 
-    public PopWinCommonEdit(Activity paramActivity, View.OnClickListener paramOnClickListener, int paramInt1, int paramInt2){
+    public PopWinCommonEdit(Activity paramActivity, View.OnClickListener paramOnClickListener, int paramInt1, int paramInt2, List<String> qxList){
         super(paramActivity);
         //窗口布局
         mainView = LayoutInflater.from(paramActivity).inflate(R.layout.popwin_commonedit, null);
@@ -41,6 +43,8 @@ public class PopWinCommonEdit extends PopupWindow{
         //附件
         layoutFujian = (LinearLayout)mainView.findViewById(R.id.layout_fujian);
         badgeView = mainView.findViewById(R.id.badgeText);
+
+        this.qxList = qxList;
 
         //设置每个子布局的事件监听器
         if (paramOnClickListener != null){
@@ -86,13 +90,15 @@ public class PopWinCommonEdit extends PopupWindow{
         }else{
             approvalstatus = 0;
         }
-
+        setView(R.id.layout_fujian,true);
+        setView(R.id.layout_add,true);
         if(main_data.get("estatus") != null && estatus == 7){
             setView(R.id.layout_save,true);
             setView(R.id.layout_uncheck,true);
             //隐藏
             setView(R.id.layout_delete,false);
             setView(R.id.layout_check,false);
+            setHeight(240);
 
         }else if(main_data.get("estatus") != null && estatus == 1 && main_data.get("approvalstatus")!= null && approvalstatus == 1){
             //隐藏
@@ -100,14 +106,17 @@ public class PopWinCommonEdit extends PopupWindow{
             setView(R.id.layout_delete,false);
             setView(R.id.layout_check,false);
             setView(R.id.layout_uncheck,false);
+            setHeight(192);
 
         }else if(main_data.get("estatus") != null && estatus == 1){
             setView(R.id.layout_save,true);
             setView(R.id.layout_delete,true);
             if (isUpdate){
                 setView(R.id.layout_check,false);
+                setHeight(320);
             }else{
                 setView(R.id.layout_check,true);
+                setHeight(400);
             }
             //隐藏
             setView(R.id.layout_uncheck,false);
@@ -119,11 +128,22 @@ public class PopWinCommonEdit extends PopupWindow{
             setView(R.id.layout_check,false);
             setView(R.id.layout_uncheck,false);
             setView(R.id.layout_fujian,false);
+            setHeight(160);
         }
     }
 
     private void setView(int id,boolean state){
-        if (state){
+        if (R.id.layout_save == id && qxList.contains("save") && state){
+            mainView.findViewById(id).setVisibility(View.VISIBLE);
+        }else if (R.id.layout_delete == id && qxList.contains("delete") && state){
+            mainView.findViewById(id).setVisibility(View.VISIBLE);
+        }else if (R.id.layout_check == id && qxList.contains("check") && state){
+            mainView.findViewById(id).setVisibility(View.VISIBLE);
+        }else if (R.id.layout_uncheck == id && qxList.contains("uncheck") && state){
+            mainView.findViewById(id).setVisibility(View.VISIBLE);
+        }else if (R.id.layout_add == id && qxList.contains("add") && state){
+            mainView.findViewById(id).setVisibility(View.VISIBLE);
+        }else if (R.id.layout_fujian == id && qxList.contains("fj") && state){
             mainView.findViewById(id).setVisibility(View.VISIBLE);
         }else{
             mainView.findViewById(id).setVisibility(View.GONE);

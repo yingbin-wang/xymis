@@ -25,6 +25,25 @@ import java.util.Map;
 public class MyClient_editActivity extends CommonEditActivity{
 
     @Override
+    public void checkQx() {
+        if (qxMap != null){
+            if (qxMap.get("modQx")!= null && qxMap.get("modQx").toString().equals("true")){
+                qxList.add("save");
+            }
+            if (qxMap.get("delQx")!= null && qxMap.get("delQx").toString().equals("true")){
+                qxList.add("delete");
+            }
+        }
+
+        qxList.remove("add");
+    }
+
+    @Override
+    public void clearColumn(Map<String, Object> main_data) {
+        main_data.remove("code");
+    }
+
+    /*@Override
     public Menu checkQx(Menu menu) {
         if (qxMap != null){
             if (qxMap.get("modQx")!= null && qxMap.get("modQx").toString().equals("true")){
@@ -35,10 +54,6 @@ public class MyClient_editActivity extends CommonEditActivity{
             }
         }
         return  menu;
-    }
+    }*/
 
-    @Override
-    public void clearColumn(Map<String, Object> main_data) {
-        main_data.remove("code");
-    }
 }

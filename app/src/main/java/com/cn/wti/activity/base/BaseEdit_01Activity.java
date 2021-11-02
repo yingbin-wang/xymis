@@ -14,11 +14,17 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.ObjectArrayCodec;
 import com.cn.wti.activity.common.BadgeActionProvider;
+import com.cn.wti.activity.dialog.PopWinCommonEdit;
+import com.cn.wti.activity.dialog.PopWinShare;
+import com.cn.wti.activity.myTask.MyTask_edit_Activity;
 import com.cn.wti.entity.System_one;
 import com.cn.wti.entity.adapter.handler.MyHandler;
 import com.cn.wti.entity.parms.ListParms;
@@ -33,6 +39,7 @@ import com.cn.wti.util.db.FastJsonUtils;
 import com.dina.ui.model.IListItem;
 import com.dina.ui.widget.UITableView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,20 +52,30 @@ import java.util.Set;
 public abstract class BaseEdit_01Activity extends BaseEditActivity{
 
     protected  Map<String,String> initMap;
-    private String pars,version="";
+    private String pars,version="",status="";
     private ActionBar actionBar;
     protected String[] contents;
     protected Map<String,Object> qxMap;
-    protected BadgeActionProvider mActionProvider;
-
+    private ImageButton title_back2,title_ok2 = null;
+    private TextView title_name2 = null;
+    private PopWinCommonEdit popWinShare = null;
+    int height=0;
+    protected List<String> qxList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        actionBar = this.getActionBar();
+        /*actionBar = this.getActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setLogo(R.mipmap.navigationbar_back);
+        actionBar.setLogo(R.mipmap.navigationbar_back);*/
+
+        title_back2 = findViewById(R.id.title_back2);
+        title_ok2 = findViewById(R.id.title_ok2);
+        title_back2.setOnClickListener(new ViewOnClick());
+        title_ok2.setOnClickListener(new ViewOnClick());
+        title_ok2.setBackgroundResource(R.mipmap.documentmore);
+        title_name2 = findViewById(R.id.title_name2);
 
         Intent intent = getIntent();
         System_one so = (System_one)intent.getSerializableExtra("parms");
@@ -75,7 +92,8 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
             menu_code = parmsMap.get("menucode").toString();
             menu_name = parmsMap.get("menuname").toString();
             ywtype = parmsMap.get("type").toString();
-            actionBar.setTitle(menu_name);
+            //actionBar.setTitle(menu_name);
+            title_name2.setText(menu_name);
         }
         //20171226 如果 有 serviceName 直接用serviceName
         if (parmsMap.get("serviceName")!= null){
@@ -97,171 +115,9 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
         myHandler= new MyHandler(mContext);
         mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "加载中...");
         myHandler.sendEmptyMessageDelayed(1,1000);
-
     }
 
     public void initData() { }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       if ((isEdit == 0 || isEdit == 1)){
-           if (approvalstatus != null && approvalstatus.equals("1")){
-               return  false;
-           }
-           menu = checkQx(menu);
-           return super.onCreateOptionsMenu(menu);
-       }else{
-           return true;
-       }
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (main_data == null){return  true;}
-        int estatus = 0,approvalstatus=0;
-        if (main_data.get("estatus") != null && !main_data.get("estatus") .equals("")){
-            estatus = Integer.parseInt(main_data.get("estatus").toString());
-        }else{
-            estatus =1;
-        }
-
-        if(main_data.get("approvalstatus") != null){
-            approvalstatus = Integer.parseInt(main_data.get("approvalstatus").toString());
-        }else{
-            approvalstatus = 0;
-        }
-
-        setMenuVisible(menu.findItem(R.id.upload),true);
-        if(main_data.get("estatus") != null && estatus == 7){
-            //setMenuVisible(menu.findItem(R.id.add),true);
-            setMenuVisible(menu.findItem(R.id.save),true);
-            setMenuVisible(menu.findItem(R.id.uncheck),true);
-            //隐藏
-            setMenuVisible(menu.findItem(R.id.delete),false);
-            setMenuVisible(menu.findItem(R.id.check),false);
-
-        }else if(main_data.get("estatus") != null && estatus == 1 && main_data.get("approvalstatus")!= null && approvalstatus == 1){
-            //setMenuVisible(menu.findItem(R.id.add),true);
-            //隐藏
-            setMenuVisible(menu.findItem(R.id.save),false);
-            setMenuVisible(menu.findItem(R.id.delete),false);
-            setMenuVisible(menu.findItem(R.id.check),false);
-            setMenuVisible(menu.findItem(R.id.uncheck),false);
-
-        }else if(main_data.get("estatus") != null && estatus == 1){
-            //setMenuVisible(menu.findItem(R.id.add),true);
-            setMenuVisible(menu.findItem(R.id.save),true);
-            setMenuVisible(menu.findItem(R.id.delete),true);
-            if (isUpdate){
-                setMenuVisible(menu.findItem(R.id.check),false);
-            }else{
-                setMenuVisible(menu.findItem(R.id.check),true);
-            }
-            //隐藏
-            setMenuVisible(menu.findItem(R.id.uncheck),false);
-
-        }else if(main_data.get("estatus") == null){
-            //setMenuVisible(menu.findItem(R.id.add),true);
-            setMenuVisible(menu.findItem(R.id.save),true);
-            //隐藏
-            setMenuVisible(menu.findItem(R.id.delete),false);
-            setMenuVisible(menu.findItem(R.id.check),false);
-            setMenuVisible(menu.findItem(R.id.uncheck),false);
-            setMenuVisible(menu.findItem(R.id.upload),false);
-        }
-
-        this.getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                if (!current_type.equals("")){
-                    Intent intent = new Intent();
-                    intent.putExtra("index",index);
-                    intent.putExtra("type",current_type);
-                    if (main_data != null){
-                        intent.putExtras(AppUtils.setParms("",main_data));
-                    }else{
-                        intent.putExtras(AppUtils.setParms("",new HashMap<String,Object>()));
-                    }
-
-                    setResult(1,intent);
-                }
-                this.finish();
-                break;
-            case R.id.add:
-                addAction();
-                break;
-            case R.id.save:
-                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "保存中...");
-                myHandler.sendEmptyMessageDelayed(2,1000);
-                //saveOrEdit();
-                break;
-            case R.id.delete:
-                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "删除中...");
-                myHandler.sendEmptyMessageDelayed(3,1000);
-
-                break;
-            case R.id.check:
-                if (main_data.get("estauts") != null && main_data.get("estauts").equals("7")){
-                    Toast.makeText(mContext,mContext.getString(R.string.save_check_text),Toast.LENGTH_SHORT).show();
-                    return false;
-                }else if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
-                    Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-                //版本号
-                if (main_data.get("version")!= null){
-                    version = main_data.get("version").toString();
-                }
-                /*pars = "{\"userId\":\""+ AppUtils.app_username
-                        +"\",\"DATA_IDS\":\""+id+"\",\"version\":\""+version+"\",\"userid\":\""+AppUtils.user.get_id()
-                        +"\",\"ip\":\""+AppUtils.app_ip+"\",\"device\":\"PHONE"
-                        +"\",\"estatus\":\"7\",\"auditby\":\""+AppUtils.app_username+"\"}";*/
-                pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:7","check").getParms();
-                auditAll(mContext,"auditAll",pars);
-                break;
-            case R.id.uncheck:
-                if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
-                    Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
-                //版本号
-                if (main_data.get("version")!= null){
-                    version = main_data.get("version").toString();
-                }
-
-                /*pars = "{\"userId\":\""+ AppUtils.app_username+"\",\"DATA_IDS\":\""+id+"\",\"version\":\""+version
-                        +"\",\"ip\":\""+AppUtils.app_ip+"\",\"device\":\"PHONE"
-                        +"\",\"estatus\":\"1\"}";*/
-                pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:1","check").getParms();
-                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "撤审中...");
-                HandlerThread handlerThread = new HandlerThread("handlerThread");
-                handlerThread.start();
-                MyHandler handler = new MyHandler(handlerThread.getLooper(),mContext);
-                Message msg = handler.obtainMessage();
-                //利用bundle对象来传值
-                Bundle b = new Bundle();
-                b.putString("pars", pars);
-                b.putString("method", "auditAll");
-                msg.what = 5;
-                msg.setData(b);
-                msg.sendToTarget();
-                //audit(mContext,"auditAll",pars);
-                break;
-            case R.id.upload:
-                main_data.put("menucode",menu_code);
-                ActivityController.startMyFileActivity(mContext,main_data);
-                break;
-            default:
-                break;
-        }
-        return super.onMenuItemSelected(featureId, item);
-    }
 
     public boolean deleteAll(){
         //审批状态
@@ -628,13 +484,386 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
                 tableView.setTag(this);
             }
         }
+
+        initStatus();
     }
 
-    public Menu checkQx(Menu menu){
-        /*getMenuInflater().inflate(R.menu.menu_auditall, menu);
-        MenuItem menuItem = menu.findItem(R.id.upload);
-        mActionProvider = (BadgeActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        mActionProvider.setBadge(6);*/
+    void initStatus(){
+        if (main_data == null){return;}
+        int estatus = 0,approvalstatus=0;
+        if (main_data.get("estatus") != null && !main_data.get("estatus") .equals("")){
+            estatus = Integer.parseInt(main_data.get("estatus").toString());
+        }else{
+            estatus =1;
+        }
+
+        if(main_data.get("approvalstatus") != null){
+            approvalstatus = Integer.parseInt(main_data.get("approvalstatus").toString());
+        }else{
+            approvalstatus = 0;
+        }
+
+        if(main_data.get("estatus") != null && estatus == 7){
+            status = "check";
+        }else if(main_data.get("estatus") != null && estatus == 1 && main_data.get("approvalstatus")!= null && approvalstatus == 1){
+            status = "sp";
+        }else if(main_data.get("estatus") != null && estatus == 1){
+            status = "save";
+        }else if(main_data.get("estatus") == null){
+            status = "add";
+        }
+    }
+
+    public class ViewOnClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.title_back2:
+                    finish();
+                    break;
+                case R.id.title_ok2:
+                    showPopWindow();
+                    break;
+                case android.R.id.home:
+                    if (!current_type.equals("")){
+                        Intent intent = new Intent();
+                        intent.putExtra("index",index);
+                        intent.putExtra("type",current_type);
+                        if (main_data != null){
+                            intent.putExtras(AppUtils.setParms("",main_data));
+                        }else{
+                            intent.putExtras(AppUtils.setParms("",new HashMap<String,Object>()));
+                        }
+                        setResult(1,intent);
+                    }
+                    finish();
+                    break;
+                case R.id.layout_add:
+                    addAction();
+                    closePopWin();
+                    status = "add";
+                    break;
+                case R.id.layout_save:
+                    mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "保存中...");
+                    myHandler.sendEmptyMessageDelayed(2,1000);
+                    closePopWin();
+                    status = "save";
+                    break;
+                case R.id.layout_delete:
+                    mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "删除中...");
+                    myHandler.sendEmptyMessageDelayed(3,1000);
+                    closePopWin();
+                    status = "delete";
+                    break;
+                case R.id.layout_check:
+                    if (main_data.get("estauts") != null && main_data.get("estauts").equals("7")){
+                        Toast.makeText(mContext,mContext.getString(R.string.save_check_text),Toast.LENGTH_SHORT).show();
+                        return;
+                    }else if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
+                        Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    //版本号
+                    if (main_data.get("version")!= null){
+                        version = main_data.get("version").toString();
+                    }
+                    pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:7","check").getParms();
+                    auditAll(mContext,"auditAll",pars);
+                    closePopWin();
+                    status = "check";
+                    break;
+                case R.id.layout_uncheck:
+                    if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
+                        Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    //版本号
+                    if (main_data.get("version")!= null){
+                        version = main_data.get("version").toString();
+                    }
+                    pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:1","check").getParms();
+                    mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "撤审中...");
+                    HandlerThread handlerThread = new HandlerThread("handlerThread");
+                    handlerThread.start();
+                    MyHandler handler = new MyHandler(handlerThread.getLooper(),mContext);
+                    Message msg = handler.obtainMessage();
+                    //利用bundle对象来传值
+                    Bundle b = new Bundle();
+                    b.putString("pars", pars);
+                    b.putString("method", "auditAll");
+                    msg.what = 5;
+                    msg.setData(b);
+                    msg.sendToTarget();
+                    closePopWin();
+                    status = "uncheck";
+                    break;
+                case R.id.layout_fujian:
+                    main_data.put("menucode",menu_code);
+                    ActivityController.startMyFileActivity(mContext,main_data);
+                    closePopWin();
+                    break;
+            }
+        }
+    }
+
+    void showPopWindow(){
+
+        main_data.put("menu_code",menu_code);
+        if (!menu_code.equals("mycustomer")){
+            if (status.equals("add")){
+                height = 160;
+            }else if (status.equals("save")){
+                height = 400;
+            }else if (status.equals("sp")){
+                height = 160;
+            }else if (status.equals("check")){
+                height = 320;
+            }else{
+                height = 400;
+            }
+        }else{
+            if (ywtype.equals("add")){
+                height = 80;
+            }else{
+                height = 160;
+            }
+        }
+
+        if (popWinShare == null) {
+            checkQx();
+            //自定义的单击事件
+            ViewOnClick paramOnClickListener = new ViewOnClick();
+            popWinShare = new PopWinCommonEdit(BaseEdit_01Activity.this, paramOnClickListener,260,height,qxList);
+            //监听窗口的焦点事件，点击窗口外面则取消显示
+            popWinShare.getContentView().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        popWinShare.dismiss();
+                    }
+                }
+            });
+        }else{
+            popWinShare.setHeight(height);
+        }
+        //设置默认获取焦点
+        popWinShare.setFocusable(true);
+        //以某个控件的x和y的偏移量位置开始显示窗口
+        popWinShare.showAsDropDown(title_ok2, 0, 0);
+        //如果窗口存在，则更新
+        popWinShare.update();
+        popWinShare.setEstatus(main_data,isUpdate);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String pars = new ListParms(menu_code,"id:"+main_data.get("id")+",code:"+main_data.get("code")+",name:"+menu_code).getParms();
+                List<Map<String,Object>> res_array = null;
+                Object res = ActivityController.getData2ByPost(mContext,"menu","findClUploadFilesByIdAndName", StringUtils.strTOJsonstr(pars));
+                if (res != null && res instanceof JSONArray){
+                    res_array = (List<Map<String, Object>>) res;
+
+                }
+                final List<Map<String, Object>> finalRes_array = res_array;
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (finalRes_array.size() >0){
+                            popWinShare.setBadgeText(finalRes_array.size());
+                        }else{
+                            popWinShare.setBadgeText(0);
+                        }
+
+                    }
+                });
+            }
+        }).start();
+    }
+
+    void closePopWin(){
+        if (popWinShare != null){
+            popWinShare.dismiss();
+        }
+    }
+
+    public void checkQx(){
+        if (qxMap != null){
+            if(qxMap.get("addQx") != null && qxMap.get("addQx").toString().equals("true")){
+                qxList.add("add");
+            }
+            if (qxMap.get("modQx")!= null && qxMap.get("modQx").toString().equals("true")){
+                qxList.add("save");
+            }
+            if (qxMap.get("delQx")!= null && qxMap.get("delQx").toString().equals("true")){
+                qxList.add("delete");
+            }
+            if (qxMap.get("checkQx")!= null && qxMap.get("checkQx").toString().equals("true")){
+                qxList.add("check");
+            }
+            if (qxMap.get("uncheckQx")!= null && qxMap.get("uncheckQx").toString().equals("true")){
+                qxList.add("uncheck");
+            }
+
+            qxList.add("fj");
+        }
+    }
+
+
+    /* @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       if ((isEdit == 0 || isEdit == 1)){
+           if (approvalstatus != null && approvalstatus.equals("1")){
+               return  false;
+           }
+           menu = checkQx(menu);
+           return super.onCreateOptionsMenu(menu);
+       }else{
+           return true;
+       }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (main_data == null){return  true;}
+        int estatus = 0,approvalstatus=0;
+        if (main_data.get("estatus") != null && !main_data.get("estatus") .equals("")){
+            estatus = Integer.parseInt(main_data.get("estatus").toString());
+        }else{
+            estatus =1;
+        }
+
+        if(main_data.get("approvalstatus") != null){
+            approvalstatus = Integer.parseInt(main_data.get("approvalstatus").toString());
+        }else{
+            approvalstatus = 0;
+        }
+
+        setMenuVisible(menu.findItem(R.id.upload),true);
+        if(main_data.get("estatus") != null && estatus == 7){
+            //setMenuVisible(menu.findItem(R.id.add),true);
+            setMenuVisible(menu.findItem(R.id.save),true);
+            setMenuVisible(menu.findItem(R.id.uncheck),true);
+            //隐藏
+            setMenuVisible(menu.findItem(R.id.delete),false);
+            setMenuVisible(menu.findItem(R.id.check),false);
+
+        }else if(main_data.get("estatus") != null && estatus == 1 && main_data.get("approvalstatus")!= null && approvalstatus == 1){
+            //setMenuVisible(menu.findItem(R.id.add),true);
+            //隐藏
+            setMenuVisible(menu.findItem(R.id.save),false);
+            setMenuVisible(menu.findItem(R.id.delete),false);
+            setMenuVisible(menu.findItem(R.id.check),false);
+            setMenuVisible(menu.findItem(R.id.uncheck),false);
+
+        }else if(main_data.get("estatus") != null && estatus == 1){
+            //setMenuVisible(menu.findItem(R.id.add),true);
+            setMenuVisible(menu.findItem(R.id.save),true);
+            setMenuVisible(menu.findItem(R.id.delete),true);
+            if (isUpdate){
+                setMenuVisible(menu.findItem(R.id.check),false);
+            }else{
+                setMenuVisible(menu.findItem(R.id.check),true);
+            }
+            //隐藏
+            setMenuVisible(menu.findItem(R.id.uncheck),false);
+
+        }else if(main_data.get("estatus") == null){
+            //setMenuVisible(menu.findItem(R.id.add),true);
+            setMenuVisible(menu.findItem(R.id.save),true);
+            //隐藏
+            setMenuVisible(menu.findItem(R.id.delete),false);
+            setMenuVisible(menu.findItem(R.id.check),false);
+            setMenuVisible(menu.findItem(R.id.uncheck),false);
+            setMenuVisible(menu.findItem(R.id.upload),false);
+        }
+
+        this.getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
+        return super.onPrepareOptionsMenu(menu);
+    }
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                if (!current_type.equals("")){
+                    Intent intent = new Intent();
+                    intent.putExtra("index",index);
+                    intent.putExtra("type",current_type);
+                    if (main_data != null){
+                        intent.putExtras(AppUtils.setParms("",main_data));
+                    }else{
+                        intent.putExtras(AppUtils.setParms("",new HashMap<String,Object>()));
+                    }
+
+                    setResult(1,intent);
+                }
+                this.finish();
+                break;
+            case R.id.add:
+                addAction();
+                break;
+            case R.id.save:
+                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "保存中...");
+                myHandler.sendEmptyMessageDelayed(2,1000);
+                //saveOrEdit();
+                break;
+            case R.id.delete:
+                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "删除中...");
+                myHandler.sendEmptyMessageDelayed(3,1000);
+
+                break;
+            case R.id.check:
+                if (main_data.get("estauts") != null && main_data.get("estauts").equals("7")){
+                    Toast.makeText(mContext,mContext.getString(R.string.save_check_text),Toast.LENGTH_SHORT).show();
+                    return false;
+                }else if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
+                    Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                //版本号
+                if (main_data.get("version")!= null){
+                    version = main_data.get("version").toString();
+                }
+                pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:7","check").getParms();
+                auditAll(mContext,"auditAll",pars);
+                break;
+            case R.id.uncheck:
+                if (main_data.get("approvalstatus") != null && main_data.get("approvalstatus").equals("1")){
+                    Toast.makeText(mContext,mContext.getString(R.string.save_sp_text),Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                //版本号
+                if (main_data.get("version")!= null){
+                    version = main_data.get("version").toString();
+                }
+
+                pars = new ListParms(menu_code,"DATA_IDS:"+id+",version:"+version+",estatus:1","check").getParms();
+                mDialog = WeiboDialogUtils.createLoadingDialog(mContext, "撤审中...");
+                HandlerThread handlerThread = new HandlerThread("handlerThread");
+                handlerThread.start();
+                MyHandler handler = new MyHandler(handlerThread.getLooper(),mContext);
+                Message msg = handler.obtainMessage();
+                //利用bundle对象来传值
+                Bundle b = new Bundle();
+                b.putString("pars", pars);
+                b.putString("method", "auditAll");
+                msg.what = 5;
+                msg.setData(b);
+                msg.sendToTarget();
+                break;
+            case R.id.upload:
+                main_data.put("menucode",menu_code);
+                ActivityController.startMyFileActivity(mContext,main_data);
+                break;
+            default:
+                break;
+        }
+        return super.onMenuItemSelected(featureId, item);
+    }
+    */
+
+    /*public Menu checkQx(Menu menu){
         if (qxMap != null){
             if(qxMap.get("addQx") != null && qxMap.get("addQx").toString().equals("true")){
                 menu.addSubMenu(0,R.id.add,1,"新增");
@@ -661,6 +890,6 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
         if (view != null) {
             view.setVisible(visibile);
         }
-    }
+    }*/
 
 }

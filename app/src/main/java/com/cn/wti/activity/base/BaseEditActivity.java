@@ -14,6 +14,7 @@ import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -136,6 +137,7 @@ public class BaseEditActivity extends BaseActivity implements MyAdapter2.IonSlid
         Resources.Theme  theme = getTheme();
         setTheme(R.style.CustomActionBarTheme);
         boolean state = true;
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         try {
             if (layout != 0){
                 setContentView(layout);
