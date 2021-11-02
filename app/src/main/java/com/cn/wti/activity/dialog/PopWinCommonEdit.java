@@ -98,7 +98,7 @@ public class PopWinCommonEdit extends PopupWindow{
             //隐藏
             setView(R.id.layout_delete,false);
             setView(R.id.layout_check,false);
-            setHeight(240);
+            //setHeight(240);
 
         }else if(main_data.get("estatus") != null && estatus == 1 && main_data.get("approvalstatus")!= null && approvalstatus == 1){
             //隐藏
@@ -106,17 +106,17 @@ public class PopWinCommonEdit extends PopupWindow{
             setView(R.id.layout_delete,false);
             setView(R.id.layout_check,false);
             setView(R.id.layout_uncheck,false);
-            setHeight(192);
+            //setHeight(192);
 
         }else if(main_data.get("estatus") != null && estatus == 1){
             setView(R.id.layout_save,true);
             setView(R.id.layout_delete,true);
             if (isUpdate){
                 setView(R.id.layout_check,false);
-                setHeight(320);
+                //setHeight(320);
             }else{
                 setView(R.id.layout_check,true);
-                setHeight(400);
+                //setHeight(400);
             }
             //隐藏
             setView(R.id.layout_uncheck,false);
@@ -128,7 +128,7 @@ public class PopWinCommonEdit extends PopupWindow{
             setView(R.id.layout_check,false);
             setView(R.id.layout_uncheck,false);
             setView(R.id.layout_fujian,false);
-            setHeight(160);
+            //setHeight(160);
         }
     }
 

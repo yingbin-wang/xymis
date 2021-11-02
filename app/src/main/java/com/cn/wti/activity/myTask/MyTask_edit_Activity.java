@@ -120,7 +120,7 @@ public class MyTask_edit_Activity extends BaseEdit_ProcessActivity {
         if (popWinShare == null) {
             //自定义的单击事件
             OnClickLintener paramOnClickListener = new OnClickLintener();
-            popWinShare = new PopWinShare(MyTask_edit_Activity.this, paramOnClickListener,260,400);
+            popWinShare = new PopWinShare(MyTask_edit_Activity.this, paramOnClickListener,260,AppUtils.dp2pxInt(mContext,160));
             //监听窗口的焦点事件，点击窗口外面则取消显示
             popWinShare.getContentView().setOnFocusChangeListener(new View.OnFocusChangeListener() {
 

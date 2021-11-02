@@ -612,21 +612,21 @@ public abstract class BaseEdit_01Activity extends BaseEditActivity{
         main_data.put("menu_code",menu_code);
         if (!menu_code.equals("mycustomer")){
             if (status.equals("add")){
-                height = 160;
+                height = AppUtils.dp2pxInt(mContext,64);
             }else if (status.equals("save")){
-                height = 400;
+                height = AppUtils.dp2pxInt(mContext,160);
             }else if (status.equals("sp")){
-                height = 160;
+                height = AppUtils.dp2pxInt(mContext,64);
             }else if (status.equals("check")){
-                height = 320;
+                height = AppUtils.dp2pxInt(mContext,128);
             }else{
-                height = 400;
+                height = AppUtils.dp2pxInt(mContext,160);
             }
         }else{
             if (ywtype.equals("add")){
-                height = 80;
+                height = AppUtils.dp2pxInt(mContext,32);
             }else{
-                height = 160;
+                height = AppUtils.dp2pxInt(mContext,64);
             }
         }
 

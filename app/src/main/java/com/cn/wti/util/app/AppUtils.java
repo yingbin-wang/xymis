@@ -417,6 +417,12 @@ public class AppUtils {
                 dp, context.getResources().getDisplayMetrics());
     }
 
+    public static int dp2pxInt(Context context,float dp)
+    {
+        return (int ) Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dp, context.getResources().getDisplayMetrics()));
+    }
+
     /**
      * 获得屏幕宽度
      *
