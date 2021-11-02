@@ -25,8 +25,8 @@
                 android:layout_weight="1"
                 android:textSize="13sp"
                 android:gravity="center_vertical"
-                android:textColor="@color/black"
-                style="@style/yincang_content_"/>
+                style="@style/yincang_content_"
+                android:textColor="@color/blue_2"/>
 
             <ImageView
                 android:id="@+id/item_file_delete"
