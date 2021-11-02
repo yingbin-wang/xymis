@@ -333,15 +333,15 @@ public class ReportFragment extends AbstractFragment {
 			@Override
 			public void run() {
 				init();
-				if (adapter.setMenu()){
-					for(int i = 0; i < adapter.getGroupCount(); i++){
-						expandableListView.expandGroup(i);
-					}
-				}
 
 				getActivity().runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						if (adapter.setMenu()){
+							for(int i = 0; i < adapter.getGroupCount(); i++){
+								expandableListView.expandGroup(i);
+							}
+						}
 						ts_llt = (LinearLayout) rootView.findViewById(R.id.ts_llt);
 						testView = (LinearLayout) rootView.findViewById(R.id.testView);
 						if (AppUtils.fwq_reportmenuList == null ||  AppUtils.fwq_reportmenuList .size() == 0){
